@@ -1,9 +1,9 @@
 {
-    "name": "conferenceManagementFrontApp",
+    "name": "FloxxFrontApp",
     "version": "1.0.0",
-    "description": "App to management conference organisation",
+    "description": "Flow management",
     "main": "index.js",
-    "author": "fabszn",
+    "author": "Fabrice Sznajderman",
     "license": "MIT",
     "dependencies": {
         "bootstrap": "^4.1.3",
