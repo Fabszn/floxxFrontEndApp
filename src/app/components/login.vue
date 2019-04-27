@@ -37,7 +37,7 @@ module.exports = {
     processForm: function() {
       console.log({ name: this.email, email: this.password });
       console.log("test processing");
-      this.$router.push("/test");
+      this.$router.push("/selectTypeConf");
     }
   }
 };

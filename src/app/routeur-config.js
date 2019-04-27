@@ -1,4 +1,5 @@
 import login from './components/login.vue'
+import choose from './components/typeConfChoose.vue'
 
 const Foo = { template: '<div>logged ! </div>' }
 
@@ -8,7 +9,7 @@ export const routes = [{
     component: login,
     children: [],
 }, {
-    path: '/test',
-    component: Foo,
+    path: '/selectTypeConf',
+    component: choose,
     children: [],
 }];
