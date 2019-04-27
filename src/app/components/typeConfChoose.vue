@@ -5,17 +5,17 @@
     </div>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-6">
-          <button type="button" class="btn btn-secondary btn-lg big-btn2">Conf.</button>
+        <div class="col-6">
+          <button type="button" class="btn btn-secondary btn-lg block">Conf.</button>
         </div>
-        <div class="col-sm-6">
-          <button type="button" class="btn btn-secondary btn-lg big-btn2">HOL</button>
+        <div class="col-6">
+          <button type="button" class="btn btn-secondary btn-lg block">HOL</button>
         </div>
       </div>
       <div class="row">&nbsp;</div>
       <div class="row">
-        <div class="col-sm-12">
-          <button type="button" class="btn btn-secondary btn-lg big-btn">Overflow</button>
+        <div class="col-12">
+          <button type="button" class="btn btn-secondary btn-lg block">Overflow</button>
         </div>
       </div>
     </div>
@@ -33,18 +33,6 @@
   cursor: pointer;
   text-align: center;
 }
-.big-btn {
-  width: 630px;
-  height: 100px;
-}
-
-.big-btn2 {
-  width: 300px;
-  height: 50px;
-}
-</style>
-
-
 </style>
 
 

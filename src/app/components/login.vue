@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container-fluid">
     <form id="signup-form" @submit.prevent="processForm">
       <div class="form-group">
         <label for="login">Email address</label>
