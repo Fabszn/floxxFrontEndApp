@@ -5,11 +5,8 @@
     </div>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-6">
+        <div class="col-12">
           <button type="button" class="btn btn-secondary btn-lg block" v-on:click="navToConf">Conf.</button>
-        </div>
-        <div class="col-6">
-          <button type="button" class="btn btn-secondary btn-lg block" v-on:click="navToHol">HOL</button>
         </div>
       </div>
       <div class="row">&nbsp;</div>
@@ -29,10 +26,7 @@
 module.exports = {
   methods: {
     navToConf: function() {
-      this.$router.push("/confs");
-    },
-    navToHol: function() {
-      this.$router.push("/hol");
+      this.$router.push("/rooms");
     },
     navToOverf: function() {
       this.$router.push("/overflow");

@@ -29,8 +29,8 @@
 module.exports = {
   data: function() {
     return {
-      email: "",
-      password: ""
+      email: "fa@br.cd",
+      password: "qsdd"
     };
   },
   methods: {

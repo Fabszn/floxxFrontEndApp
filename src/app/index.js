@@ -5,11 +5,15 @@ import App from './App.vue';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { routes } from './routeur-config.js';
+import Dropdown from 'vue-simple-search-dropdown';
 require('dotenv').config();
 
 
 Vue.use(VueResource);
 Vue.use(Router);
+Vue.use(Dropdown);
+
+Vue.component('Dropdown', Dropdown)
 
 console.log("hello from bundle.js")
 console.log(process.env.SERVER_URL)
