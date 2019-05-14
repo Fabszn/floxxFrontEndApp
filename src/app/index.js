@@ -13,9 +13,8 @@ Vue.use(VueResource);
 Vue.use(Router);
 Vue.use(Dropdown);
 
-Vue.component('Dropdown', Dropdown)
+Vue.component('dropdown', Dropdown)
 
-console.log("hello from bundle.js")
 console.log(process.env.SERVER_URL)
 
 const router = new Router({
