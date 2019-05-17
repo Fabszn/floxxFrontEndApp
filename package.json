@@ -29,8 +29,8 @@
         "webpack-cli": "^3.1.0",
         "webpack-dev-server": "^3.1.5"
     },
-    "install": " webpack --env.NODE_ENV=local --env.production --progress",
     "scripts": {
+        "install": " webpack --env.NODE_ENV=local --env.production --progress",
         "start-dev": "webpack-dev-server --history-api-fallback --inline --progress",
         "start": "node ./server.js"
     }
