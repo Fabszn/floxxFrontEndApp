@@ -20,7 +20,6 @@
     <div class="row">
       <div class="d-flex flex-wrap">{{talkType}}</div>
     </div>
-    <div class="d-flex p-2 bd-highlight">I'm a flexbox container!</div>
   </div>
 </template>
 
@@ -34,7 +33,7 @@ module.exports = {
     };
   },
   created() {
-    this.$http.get(process.env.SERVER_URL + "api/slots").then(p => {
+    this.$http.get(process.env["SERVER_URL"] + "api/slots").then(p => {
       this.slots = p.data.slots;
     });
   },
@@ -42,7 +41,7 @@ module.exports = {
     validateSelection: function(item) {
       console.log("validate" + item.id);
       this.$http
-        .get(process.env.SERVER_URL + "api/slots/" + item.id)
+        .get(process.env["SERVER_URL"] + "api/slots/" + item.id)
         .then(p => {
           this.title = p.data.slot.talk.title;
           this.talkType = p.data.slot.talk.talkType;

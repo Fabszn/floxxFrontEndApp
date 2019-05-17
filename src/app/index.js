@@ -15,7 +15,7 @@ Vue.use(Dropdown);
 
 Vue.component('dropdown', Dropdown)
 
-console.log(process.env.SERVER_URL)
+console.log(process.env["SERVER_URL"])
 
 const router = new Router({
     routes,
