@@ -6,7 +6,8 @@ import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { routes } from './routeur-config.js';
 import Dropdown from 'vue-simple-search-dropdown';
-require('dotenv').config();
+(require('dotenv').config({ silent: process.env.NODE_ENV === 'production' }))
+
 
 
 Vue.use(VueResource);
