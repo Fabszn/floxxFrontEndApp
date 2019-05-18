@@ -36,7 +36,7 @@ module.exports = {
   methods: {
     processForm: function() {
       console.log({ name: this.email, email: this.password });
-      console.log("test processing");
+      console.log(BACKEND_URL);
       this.$router.push("/selectTypeConf");
     }
   }

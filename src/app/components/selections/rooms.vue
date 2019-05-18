@@ -33,19 +33,17 @@ module.exports = {
     };
   },
   created() {
-    this.$http.get(process.env["SERVER_URL"] + "api/slots").then(p => {
+    this.$http.get(BACKEND_URL + "api/slots").then(p => {
       this.slots = p.data.slots;
     });
   },
   methods: {
     validateSelection: function(item) {
       console.log("validate" + item.id);
-      this.$http
-        .get(process.env["SERVER_URL"] + "api/slots/" + item.id)
-        .then(p => {
-          this.title = p.data.slot.talk.title;
-          this.talkType = p.data.slot.talk.talkType;
-        });
+      this.$http.get(BACKEND_URL + "api/slots/" + item.id).then(p => {
+        this.title = p.data.slot.talk.title;
+        this.talkType = p.data.slot.talk.talkType;
+      });
     },
     getDropdownValues: function(p) {}
   }
