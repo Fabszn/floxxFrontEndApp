@@ -40,6 +40,11 @@
         <button type="button" class="btn btn-secondary btn-lg block-red" v-on:click="hit(100)">Full</button>
       </div>
     </div>
+    <div class="row">
+      <div class="col-5">&nbsp;</div>
+      <div class="col-12">{{selection}}</div>
+      <div class="col-5">&nbsp;</div>
+    </div>
   </div>
 </template>
 <script>
@@ -48,11 +53,13 @@ module.exports = {
   data: function() {
     console.log(this.slotId);
     return {
-      id: this.slotId
+      id: this.slotId,
+      selection: 0
     };
   },
   methods: {
     hit: function(perc) {
+      this.selection = perc;
       console.log(perc);
     }
   }
