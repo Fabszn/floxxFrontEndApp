@@ -59,8 +59,14 @@ module.exports = {
   },
   methods: {
     hit: function(perc) {
-      this.selection = perc;
-      console.log(perc);
+      this.$http
+        .post(BACKEND_URL + "api/hit", {
+          slotId: JSON.stringify(this.slotId),
+          percentage: JSON.stringify(perc)
+        })
+        .then(p => {
+          this.selection = perc;
+        });
     }
   }
 };

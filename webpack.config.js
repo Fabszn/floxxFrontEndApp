@@ -5,8 +5,8 @@ const webpack = require('webpack');
 
 var apiHost;
 
-var setupAPI = function(env) {
-    console.log("setup API " + env["NODE_ENV"])
+var setupEnv = function(env) {
+    console.log("setup Env " + env["NODE_ENV"])
     switch (env["NODE_ENV"]) {
         case 'production':
             apiHost = JSON.stringify("http://floxxbackend.cleverapps.io/")
@@ -21,7 +21,7 @@ var setupAPI = function(env) {
 }
 
 module.exports = env => {
-    setupAPI(env);
+    setupEnv(env);
     return {
         entry: __dirname + "/src/app/index.js", // webpack entry point. Module to start building dependency graph
         output: {
