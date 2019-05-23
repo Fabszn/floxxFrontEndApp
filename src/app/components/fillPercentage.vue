@@ -41,23 +41,47 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-5">&nbsp;</div>
-      <div class="col-12">{{selection}}</div>
-      <div class="col-5">&nbsp;</div>
+      <div class="col-12">
+        <vue-circle
+          ref="myUniqueID"
+          v-bind:progress="selection"
+          :size="100"
+          :reverse="false"
+          line-cap="round"
+          :fill="fill"
+          empty-fill="rgba(0, 0, 0, .1)"
+          :animation-start-value="0.0"
+          :start-angle="380"
+          insert-mode="prepend"
+          :thickness="5"
+          :show-percent="true"
+          @vue-circle-progress="progress"
+          @vue-circle-end="progress_end"
+        >
+          <p>Maillot</p>
+        </vue-circle>
+      </div>
     </div>
   </div>
 </template>
+
 <script>
-module.exports = {
+import VueCircle from "vue2-circle-progress";
+export default {
+  components: {
+    VueCircle
+  },
   props: ["slotId"],
   data: function() {
-    console.log(this.slotId);
     return {
       id: this.slotId,
-      selection: 0
+      fill: { gradient: ["green"] },
+      selection: 12
     };
   },
   methods: {
+    progress_end: function() {},
+    progress: function() {},
     hit: function(perc) {
       this.$http
         .post(BACKEND_URL + "api/hit", {
@@ -65,7 +89,9 @@ module.exports = {
           percentage: JSON.stringify(perc)
         })
         .then(p => {
-          this.selection = perc;
+          console.log(perc);
+          console.log(this.selection);
+          this.$refs.myUniqueID.updateProgress(perc);
         });
     }
   }
