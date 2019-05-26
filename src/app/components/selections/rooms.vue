@@ -15,14 +15,13 @@
     </div>
     <div class="row">&nbsp;</div>
     <div v-if="slotId != ''">
-      <div class="row">
+      <div class="row text-center">
         <div class="d-flex flex-wrap">{{title}}</div>
-        <div class>{{slotId}}</div>
       </div>
-      <div class="row">
+      <div class="row space" wrap>
         <div class="d-flex flex-wrap">{{talkType}}</div>
       </div>
-      <div class="row">
+      <div class="row space">
         <div class="d-flex flex-wrap">
           <button v-on:click="selectSlot" class="btn btn-primary">Select</button>
         </div>
@@ -49,10 +48,9 @@ module.exports = {
   methods: {
     selectSlot: function() {
       console.log("select");
-      this.$router.push({ name: "fill", params: { slotId: this.slotId } });
+      this.$router.push("fill/" + this.slotId);
     },
     validateSelection: function(item) {
-      console.log("validate" + item.id);
       this.$http.get(BACKEND_URL + "api/slots/" + item.id).then(p => {
         this.title = p.data.slot.talk.title;
         this.talkType = p.data.slot.talk.talkType;
@@ -63,3 +61,9 @@ module.exports = {
   }
 };
 </script>
+
+<style scoped>
+.space {
+  margin: 2px 2px 2px 2px;
+}
+</style>

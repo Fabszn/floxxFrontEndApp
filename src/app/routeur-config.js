@@ -22,10 +22,8 @@ export const routes = [{
     component: overflow,
     children: [],
 }, {
-    path: '/fill',
-    name: 'fill',
+    path: '/fill/:slotid',
     component: fill,
-    props: true,
     children: [],
 }, {
     path: '/metrics',

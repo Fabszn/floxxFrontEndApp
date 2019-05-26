@@ -1,6 +1,32 @@
 <template>
   <div class="container-fluid">
     <div class="row">
+      <div class="col-12 d-flex justify-content-center">
+        <vue-circle
+          ref="lastValue"
+          v-bind:progress="0"
+          :size="100"
+          :reverse="false"
+          line-cap="round"
+          :fill="fill"
+          empty-fill="rgba(0, 0, 0, .1)"
+          :animation-start-value="0.0"
+          :start-angle="380"
+          insert-mode="append"
+          :thickness="5"
+          :show-percent="true"
+          @vue-circle-progress="progress"
+          @vue-circle-end="progress_end"
+        ></vue-circle>
+      </div>
+    </div>
+    <div class="row">&nbsp;</div>
+    <div class="row">&nbsp;</div>
+    <div class="row">&nbsp;</div>
+    <div class="row">&nbsp;</div>
+
+    <div class="row">&nbsp;</div>
+    <div class="row">
       <div class="col-6">
         <button type="button" class="btn btn-secondary btn-lg block-green" v-on:click="hit(10)">10%</button>
       </div>
@@ -40,28 +66,6 @@
         <button type="button" class="btn btn-secondary btn-lg block-red" v-on:click="hit(100)">Full</button>
       </div>
     </div>
-    <div class="row">
-      <div class="col-12">
-        <vue-circle
-          ref="myUniqueID"
-          v-bind:progress="selection"
-          :size="100"
-          :reverse="false"
-          line-cap="round"
-          :fill="fill"
-          empty-fill="rgba(0, 0, 0, .1)"
-          :animation-start-value="0.0"
-          :start-angle="380"
-          insert-mode="prepend"
-          :thickness="5"
-          :show-percent="true"
-          @vue-circle-progress="progress"
-          @vue-circle-end="progress_end"
-        >
-          <p>Maillot</p>
-        </vue-circle>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -71,12 +75,10 @@ export default {
   components: {
     VueCircle
   },
-  props: ["slotId"],
   data: function() {
     return {
-      id: this.slotId,
-      fill: { gradient: ["green"] },
-      selection: 12
+      id: this.$route.params.slotid,
+      fill: { gradient: ["green"] }
     };
   },
   methods: {
@@ -85,13 +87,11 @@ export default {
     hit: function(perc) {
       this.$http
         .post(BACKEND_URL + "api/hit", {
-          slotId: JSON.stringify(this.slotId),
+          slotId: JSON.stringify(this.$route.params.slotid),
           percentage: JSON.stringify(perc)
         })
         .then(p => {
-          console.log(perc);
-          console.log(this.selection);
-          this.$refs.myUniqueID.updateProgress(perc);
+          this.$refs.lastValue.updateProgress(perc);
         });
     }
   }
