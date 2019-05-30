@@ -6,12 +6,15 @@ import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { routes } from './routeur-config.js';
 import Dropdown from 'vue-simple-search-dropdown';
+import VueLodash from 'vue-lodash';
+
 
 
 
 Vue.use(VueResource);
 Vue.use(Router);
 Vue.use(Dropdown);
+Vue.use(VueLodash);
 
 Vue.component('dropdown', Dropdown)
 

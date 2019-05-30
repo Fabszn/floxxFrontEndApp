@@ -172,6 +172,11 @@ export default {
   created: function() {
     this.$http.get(BACKEND_URL + "api/tracks").then(p => {
       console.log(p.data);
+
+      this._.mapKeys(p.data, function(value, key) {
+        console.log("key _ " + key);
+      });
+
       this.$refs._243.updateProgress(30);
     });
 
