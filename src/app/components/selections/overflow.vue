@@ -4,7 +4,7 @@
       <div class="flex-column separate">
         <div class="space">
           <vue-circle
-            ref="lastValue"
+            ref="241"
             v-bind:progress="0"
             :size="100"
             :reverse="false"
@@ -18,11 +18,11 @@
             :show-percent="true"
             @vue-circle-progress="progress"
             @vue-circle-end="progress_end"
-          ></vue-circle>
+          >241</vue-circle>
         </div>
         <div class="space">
           <vue-circle
-            ref="lastValue"
+            ref="242"
             v-bind:progress="0"
             :size="100"
             :reverse="false"
@@ -36,11 +36,11 @@
             :show-percent="true"
             @vue-circle-progress="progress"
             @vue-circle-end="progress_end"
-          ></vue-circle>
+          >242</vue-circle>
         </div>
         <div class="space">
           <vue-circle
-            ref="lastValue"
+            ref="_243"
             v-bind:progress="0"
             :size="100"
             :reverse="false"
@@ -54,14 +54,14 @@
             :show-percent="true"
             @vue-circle-progress="progress"
             @vue-circle-end="progress_end"
-          ></vue-circle>
+          >243</vue-circle>
         </div>
       </div>
 
       <div class="flex-column separate">
         <div class="space">
           <vue-circle
-            ref="lastValue"
+            ref="251"
             v-bind:progress="0"
             :size="100"
             :reverse="false"
@@ -75,11 +75,11 @@
             :show-percent="true"
             @vue-circle-progress="progress"
             @vue-circle-end="progress_end"
-          ></vue-circle>
+          >251</vue-circle>
         </div>
         <div class="space">
           <vue-circle
-            ref="lastValue"
+            ref="252"
             v-bind:progress="0"
             :size="100"
             :reverse="false"
@@ -93,11 +93,11 @@
             :show-percent="true"
             @vue-circle-progress="progress"
             @vue-circle-end="progress_end"
-          ></vue-circle>
+          >252</vue-circle>
         </div>
         <div class="space">
           <vue-circle
-            ref="lastValue"
+            ref="253"
             v-bind:progress="0"
             :size="100"
             :reverse="false"
@@ -111,7 +111,7 @@
             :show-percent="true"
             @vue-circle-progress="progress"
             @vue-circle-end="progress_end"
-          ></vue-circle>
+          >253</vue-circle>
         </div>
       </div>
     </div>
@@ -119,7 +119,7 @@
     <div class="d-flex justify-content-around separate">
       <div class="space">
         <vue-circle
-          ref="lastValue"
+          ref="amphiB"
           v-bind:progress="0"
           :size="100"
           :reverse="false"
@@ -133,12 +133,12 @@
           :show-percent="true"
           @vue-circle-progress="progress"
           @vue-circle-end="progress_end"
-        ></vue-circle>
+        >Amphi B.</vue-circle>
       </div>
 
       <div class="space">
         <vue-circle
-          ref="lastValue"
+          ref="maillot"
           v-bind:progress="0"
           :size="100"
           :reverse="false"
@@ -152,7 +152,7 @@
           :show-percent="true"
           @vue-circle-progress="progress"
           @vue-circle-end="progress_end"
-        >toto</vue-circle>
+        >Maillot</vue-circle>
       </div>
     </div>
   </div>
@@ -168,6 +168,14 @@ export default {
     return {
       fill: { gradient: ["green"] }
     };
+  },
+  created: function() {
+    this.$http.get(BACKEND_URL + "api/tracks").then(p => {
+      console.log(p.data);
+      this.$refs._243.updateProgress(30);
+    });
+
+    console.log("I am created ");
   },
   methods: {
     progress_end: function() {},

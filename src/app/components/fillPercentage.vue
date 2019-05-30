@@ -87,7 +87,7 @@ export default {
     hit: function(perc) {
       this.$http
         .post(BACKEND_URL + "api/hit", {
-          slotId: JSON.stringify(this.$route.params.slotid),
+          slotId: this.$route.params.slotid,
           percentage: JSON.stringify(perc)
         })
         .then(p => {
