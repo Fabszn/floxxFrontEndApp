@@ -4,7 +4,7 @@
       <div class="flex-column separate">
         <div class="space">
           <vue-circle
-            ref="241"
+            ref="_241"
             v-bind:progress="0"
             :size="100"
             :reverse="false"
@@ -22,7 +22,7 @@
         </div>
         <div class="space">
           <vue-circle
-            ref="242"
+            ref="_242"
             v-bind:progress="0"
             :size="100"
             :reverse="false"
@@ -61,7 +61,7 @@
       <div class="flex-column separate">
         <div class="space">
           <vue-circle
-            ref="251"
+            ref="_251"
             v-bind:progress="0"
             :size="100"
             :reverse="false"
@@ -79,7 +79,7 @@
         </div>
         <div class="space">
           <vue-circle
-            ref="252"
+            ref="_252"
             v-bind:progress="0"
             :size="100"
             :reverse="false"
@@ -97,7 +97,7 @@
         </div>
         <div class="space">
           <vue-circle
-            ref="253"
+            ref="_253"
             v-bind:progress="0"
             :size="100"
             :reverse="false"
@@ -119,7 +119,7 @@
     <div class="d-flex justify-content-around separate">
       <div class="space">
         <vue-circle
-          ref="amphiB"
+          ref="_amphiB"
           v-bind:progress="0"
           :size="100"
           :reverse="false"
@@ -138,7 +138,7 @@
 
       <div class="space">
         <vue-circle
-          ref="maillot"
+          ref="_maillot"
           v-bind:progress="0"
           :size="100"
           :reverse="false"
@@ -160,6 +160,7 @@
 
 <script>
 import VueCircle from "vue2-circle-progress";
+import _ from "lodash";
 export default {
   components: {
     VueCircle
@@ -173,14 +174,28 @@ export default {
     this.$http.get(BACKEND_URL + "api/tracks").then(p => {
       console.log(p.data);
 
-      this._.mapKeys(p.data, function(value, key) {
-        console.log("key _ " + key);
+      _.mapKeys(p.data, (value, key) => {
+        var room = _.split(key, "_", 2)[1];
+
+        if (room == "243") {
+          this.$refs._243.updateProgress(_.toInteger(value.percentage));
+        } else if (room == "Maillot") {
+          this.$refs._maillot.updateProgress(_.toInteger(value.percentage));
+        } else if (room == "Amphi bleu") {
+          this.$refs._amphiB.updateProgress(_.toInteger(value.percentage));
+        } else if (room == "242") {
+          this.$refs._242.updateProgress(_.toInteger(value.percentage));
+        } else if (room == "241") {
+          this.$refs._241.updateProgress(_.toInteger(value.percentage));
+        } else if (room == "251") {
+          this.$refs._251.updateProgress(_.toInteger(value.percentage));
+        } else if (room == "252") {
+          this.$refs._252.updateProgress(_.toInteger(value.percentage));
+        } else if (room == "253") {
+          this.$refs._253.updateProgress(_.toInteger(value.percentage));
+        }
       });
-
-      this.$refs._243.updateProgress(30);
     });
-
-    console.log("I am created ");
   },
   methods: {
     progress_end: function() {},
