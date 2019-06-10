@@ -7,6 +7,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { routes } from './routeur-config.js';
 import Dropdown from 'vue-simple-search-dropdown';
 import VueLodash from 'vue-lodash';
+import VueNativeSock from 'vue-native-websocket'
+
 
 
 
@@ -15,6 +17,7 @@ Vue.use(VueResource);
 Vue.use(Router);
 Vue.use(Dropdown);
 Vue.use(VueLodash);
+Vue.use(VueNativeSock, 'ws://localhost:8081/api/stream/hit', { format: 'json' })
 
 Vue.component('dropdown', Dropdown)
 

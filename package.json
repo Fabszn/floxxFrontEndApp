@@ -17,6 +17,7 @@
         "vue": "^2.5.17",
         "vue-loader": "^15.4.2",
         "vue-lodash": "^2.0.2",
+        "vue-native-websocket": "^2.0.13",
         "vue-resource": "^1.5.1",
         "vue-router": "^3.0.6",
         "vue-simple-search-dropdown": "^1.0.1",

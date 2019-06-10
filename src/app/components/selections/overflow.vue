@@ -161,6 +161,28 @@
 <script>
 import VueCircle from "vue2-circle-progress";
 import _ from "lodash";
+function computeHit(percentage, key, refComponent) {
+  var room = _.split(key, "_", 2)[1];
+
+  if (room == "243") {
+    refComponent._243.updateProgress(_.toInteger(percentage));
+  } else if (room == "Maillot") {
+    refComponent._maillot.updateProgress(_.toInteger(percentage));
+  } else if (room == "Amphi bleu") {
+    refComponent._amphiB.updateProgress(_.toInteger(percentage));
+  } else if (room == "242") {
+    refComponent._242.updateProgress(_.toInteger(percentage));
+  } else if (room == "241") {
+    refComponent._241.updateProgress(_.toInteger(percentage));
+  } else if (room == "251") {
+    refComponent._251.updateProgress(_.toInteger(percentage));
+  } else if (room == "252") {
+    refComponent._252.updateProgress(_.toInteger(percentage));
+  } else if (room == "253") {
+    refComponent._253.updateProgress(_.toInteger(percentage));
+  }
+}
+
 export default {
   components: {
     VueCircle
@@ -171,29 +193,24 @@ export default {
     };
   },
   created: function() {
+    this.$options.sockets.onmessage = msg => {
+      console.log(msg);
+      if (!_.startsWith(msg.data, "Keep")) {
+        var msgAsJson = JSON.parse(msg.data);
+
+        computeHit(
+          JSON.parse(msgAsJson.hit).percentage,
+          JSON.parse(msgAsJson.hit).slotId,
+          this.$refs
+        );
+      } else {
+        console.log("Keep alive");
+      }
+    };
+
     this.$http.get(BACKEND_URL + "api/tracks").then(p => {
-      console.log(p.data);
-
       _.mapKeys(p.data, (value, key) => {
-        var room = _.split(key, "_", 2)[1];
-
-        if (room == "243") {
-          this.$refs._243.updateProgress(_.toInteger(value.percentage));
-        } else if (room == "Maillot") {
-          this.$refs._maillot.updateProgress(_.toInteger(value.percentage));
-        } else if (room == "Amphi bleu") {
-          this.$refs._amphiB.updateProgress(_.toInteger(value.percentage));
-        } else if (room == "242") {
-          this.$refs._242.updateProgress(_.toInteger(value.percentage));
-        } else if (room == "241") {
-          this.$refs._241.updateProgress(_.toInteger(value.percentage));
-        } else if (room == "251") {
-          this.$refs._251.updateProgress(_.toInteger(value.percentage));
-        } else if (room == "252") {
-          this.$refs._252.updateProgress(_.toInteger(value.percentage));
-        } else if (room == "253") {
-          this.$refs._253.updateProgress(_.toInteger(value.percentage));
-        }
+        computeHit(value.percentage, key, this.$refs);
       });
     });
   },
