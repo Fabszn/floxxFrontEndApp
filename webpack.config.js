@@ -38,7 +38,8 @@ module.exports = env => {
             }),
             new VueLoaderPlugin(),
             new webpack.DefinePlugin({
-                BACKEND_URL: apiHost
+                BACKEND_URL: apiHost,
+                WS_BACKEND_HOST: wsHost
             })
         ],
         devServer: { // configuration for webpack-dev-server

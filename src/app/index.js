@@ -17,7 +17,7 @@ Vue.use(VueResource);
 Vue.use(Router);
 Vue.use(Dropdown);
 Vue.use(VueLodash);
-Vue.use(VueNativeSock, 'ws://localhost:8081/api/stream/hit', { format: 'json' })
+Vue.use(VueNativeSock, 'ws://' + WS_BACKEND_HOST + '/api/stream/hit', { format: 'json' })
 
 Vue.component('dropdown', Dropdown)
 
