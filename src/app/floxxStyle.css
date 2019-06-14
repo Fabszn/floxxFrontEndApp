@@ -1,0 +1,10 @@
+.hello {
+    color: red;
+}
+
+.separate {
+    border: 1px dashed white;
+    margin: 2px;
+    border-radius: 10px;
+    padding: 9px;
+}

@@ -8,6 +8,7 @@ import { routes } from './routeur-config.js';
 import Dropdown from 'vue-simple-search-dropdown';
 import VueLodash from 'vue-lodash';
 import VueNativeSock from 'vue-native-websocket'
+import './floxxStyle.css'
 
 
 
