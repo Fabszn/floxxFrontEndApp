@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex align-items-center flex-column">
+  <div class="d-flex align-items-center justify-content-center flex-column">
     <div>
       <dropdown
         v-bind:options="slots"
@@ -13,8 +13,10 @@
     </div>
     <div class="space">&nbsp;</div>
 
-    <div v-if="slotId != ''">{{title}}</div>
+    <div v-if="slotId != ''" class="text-justify space">{{title}}</div>
+    <div class="space">&nbsp;</div>
     <div v-if="slotId != ''">{{talkType}}</div>
+    <div class="space">&nbsp;</div>
     <div v-if="slotId != ''">
       <button v-on:click="selectSlot" class="btn btn-primary">Select</button>
     </div>
