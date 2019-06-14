@@ -1,31 +1,22 @@
 <template>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="d-flex justify-content-center">
-        <dropdown
-          v-bind:options="slots"
-          v-on:selected="validateSelection"
-          v-on:filter="getDropdownValues"
-          :disabled="false"
-          name="Room"
-          :maxItem="10"
-          placeholder="Please select a room/slot"
-        ></dropdown>
-      </div>
+  <div class="d-flex align-items-center flex-column">
+    <div>
+      <dropdown
+        v-bind:options="slots"
+        v-on:selected="validateSelection"
+        v-on:filter="getDropdownValues"
+        :disabled="false"
+        name="Room"
+        :maxItem="10"
+        placeholder="Please select a room/slot"
+      ></dropdown>
     </div>
-    <div class="row">&nbsp;</div>
+    <div class="space">&nbsp;</div>
+
+    <div v-if="slotId != ''">{{title}}</div>
+    <div v-if="slotId != ''">{{talkType}}</div>
     <div v-if="slotId != ''">
-      <div class="row text-center">
-        <div class="d-flex flex-wrap">{{title}}</div>
-      </div>
-      <div class="row space" wrap>
-        <div class="d-flex flex-wrap">{{talkType}}</div>
-      </div>
-      <div class="row space">
-        <div class="d-flex flex-wrap">
-          <button v-on:click="selectSlot" class="btn btn-primary">Select</button>
-        </div>
-      </div>
+      <button v-on:click="selectSlot" class="btn btn-primary">Select</button>
     </div>
   </div>
 </template>
@@ -64,6 +55,12 @@ module.exports = {
 
 <style scoped>
 .space {
-  margin: 2px 2px 2px 2px;
+  margin: 15px;
+}
+
+.separate {
+  border: 1px dashed white;
+  margin: 2px;
+  border-radius: 10px;
 }
 </style>
