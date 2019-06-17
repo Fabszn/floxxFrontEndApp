@@ -14,7 +14,7 @@
     <div class="space">&nbsp;</div>
 
     <div v-if="slotId != ''" class="text-justify title separate">{{title}}</div>
-    <div class="space">&nbsp;</div>
+
     <div v-if="slotId != ''">{{talkType}}</div>
     <div class="space">&nbsp;</div>
     <div v-if="slotId != ''">
@@ -56,18 +56,4 @@ module.exports = {
 </script>
 
 <style scoped>
-.space {
-  margin: 15px;
-}
-
-.title {
-  margin: 15px;
-  width: 70%;
-}
-
-.separate {
-  border: 1px dashed white;
-  margin: 2px;
-  border-radius: 10px;
-}
 </style>

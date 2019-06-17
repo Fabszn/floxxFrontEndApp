@@ -1,7 +1,12 @@
 <template>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-12 d-flex justify-content-center">
+  <div class="d-flex flex-column">
+    <div class="d-flex justify-content-center title separate">
+      <div>{{title}}</div>
+      <div>{{talkType}}</div>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <div>
         <vue-circle
           ref="lastValue"
           v-bind:progress="0"
@@ -20,50 +25,78 @@
         ></vue-circle>
       </div>
     </div>
-    <div class="row">&nbsp;</div>
-    <div class="row">&nbsp;</div>
-    <div class="row">&nbsp;</div>
-    <div class="row">&nbsp;</div>
-
-    <div class="row">&nbsp;</div>
-    <div class="row">
-      <div class="col-6">
-        <button type="button" class="btn btn-secondary btn-lg block-green" v-on:click="hit(10)">10%</button>
+    <div class="d-flex flex-column align-content-center">
+      <div class="d-flex flex-row justify-content-center justify-content-around">
+        <div>
+          <button
+            type="button"
+            class="btn btn-secondary btn-lg block-green position"
+            v-on:click="hit(10)"
+          >10%</button>
+        </div>
+        <div>
+          <button
+            type="button"
+            class="btn btn-secondary btn-lg block-green position"
+            v-on:click="hit(20)"
+          >20%</button>
+        </div>
       </div>
-      <div class="col-6">
-        <button type="button" class="btn btn-secondary btn-lg block-green" v-on:click="hit(20)">20%</button>
+      <div class="d-flex flex-row justify-content-center justify-content-around">
+        <div>
+          <button
+            type="button"
+            class="btn btn-secondary btn-lg block-green"
+            v-on:click="hit(30)"
+          >30%</button>
+        </div>
+        <div>
+          <button
+            type="button"
+            class="btn btn-secondary btn-lg block-green"
+            v-on:click="hit(40)"
+          >40%</button>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-6">
-        <button type="button" class="btn btn-secondary btn-lg block-green" v-on:click="hit(30)">30%</button>
+      <div class="d-flex flex-row justify-content-center justify-content-around">
+        <div>
+          <button
+            type="button"
+            class="btn btn-secondary btn-lg block-orange"
+            v-on:click="hit(50)"
+          >50%</button>
+        </div>
+        <div>
+          <button
+            type="button"
+            class="btn btn-secondary btn-lg block-orange"
+            v-on:click="hit(60)"
+          >60%</button>
+        </div>
       </div>
-      <div class="col-6">
-        <button type="button" class="btn btn-secondary btn-lg block-green" v-on:click="hit(40)">40%</button>
+      <div class="d-flex flex-row justify-content-center justify-content-around">
+        <div>
+          <button
+            type="button"
+            class="btn btn-secondary btn-lg block-orange"
+            v-on:click="hit(70)"
+          >70%</button>
+        </div>
+        <div>
+          <button type="button" class="btn btn-secondary btn-lg block-red" v-on:click="hit(80)">80%</button>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-6">
-        <button type="button" class="btn btn-secondary btn-lg block-orange" v-on:click="hit(50)">50%</button>
-      </div>
-      <div class="col-6">
-        <button type="button" class="btn btn-secondary btn-lg block-orange" v-on:click="hit(60)">60%</button>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-6">
-        <button type="button" class="btn btn-secondary btn-lg block-orange" v-on:click="hit(70)">70%</button>
-      </div>
-      <div class="col-6">
-        <button type="button" class="btn btn-secondary btn-lg block-red" v-on:click="hit(80)">80%</button>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-6">
-        <button type="button" class="btn btn-secondary btn-lg block-red" v-on:click="hit(90)">90%</button>
-      </div>
-      <div class="col-6">
-        <button type="button" class="btn btn-secondary btn-lg block-red" v-on:click="hit(100)">Full</button>
+      <div class="d-flex flex-row justify-content-center justify-content-around">
+        <div>
+          <button type="button" class="btn btn-secondary btn-lg block-red" v-on:click="hit(90)">90%</button>
+        </div>
+        <div>
+          <button
+            type="button"
+            class="btn btn-secondary btn-lg block-red"
+            v-on:click="hit(100)"
+          >Full&nbsp;</button>
+        </div>
       </div>
     </div>
   </div>
@@ -78,8 +111,17 @@ export default {
   data: function() {
     return {
       id: this.$route.params.slotid,
-      fill: { gradient: ["green"] }
+      fill: { gradient: ["green"] },
+      title: "",
+      talkType: ""
     };
+  },
+  created() {
+    var itemId = this.$route.params.slotid;
+    this.$http.get(BACKEND_URL + "api/slots/" + itemId).then(p => {
+      this.title = p.data.slot.talk.title;
+      this.talkType = p.data.slot.talk.talkType;
+    });
   },
   methods: {
     progress_end: function() {},
@@ -99,6 +141,10 @@ export default {
 </script>
 
 <style  scoped>
+.limit {
+  width: 50%;
+}
+
 .block-green {
   display: block;
   width: 100%;
@@ -108,7 +154,7 @@ export default {
   font-size: 16px;
   cursor: pointer;
   text-align: center;
-  margin-bottom: 4px;
+  margin: 6px 0px 0px 10px;
 }
 
 .block-orange {
@@ -120,7 +166,7 @@ export default {
   font-size: 16px;
   cursor: pointer;
   text-align: center;
-  margin-bottom: 4px;
+  margin: 6px 0px 0px 10px;
 }
 
 .block-red {
@@ -132,6 +178,6 @@ export default {
   font-size: 16px;
   cursor: pointer;
   text-align: center;
-  margin-bottom: 4px;
+  margin: 6px 0px 0px 10px;
 }
 </style>
