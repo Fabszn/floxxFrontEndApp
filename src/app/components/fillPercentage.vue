@@ -1,8 +1,8 @@
 <template>
   <div class="d-flex flex-column">
-    <div class="d-flex justify-content-center title separate">
-      <div>{{title}}</div>
-      <div>{{talkType}}</div>
+    <div class="d-flex flex-column justify-content-center">
+      <div class="title separate">{{title}}</div>
+      <div>{{talkType}} - {{room}}</div>
     </div>
 
     <div class="d-flex justify-content-center">
@@ -113,7 +113,8 @@ export default {
       id: this.$route.params.slotid,
       fill: { gradient: ["green"] },
       title: "",
-      talkType: ""
+      talkType: "",
+      room: ""
     };
   },
   created() {
@@ -121,6 +122,11 @@ export default {
     this.$http.get(BACKEND_URL + "api/slots/" + itemId).then(p => {
       this.title = p.data.slot.talk.title;
       this.talkType = p.data.slot.talk.talkType;
+      this.$http
+        .get(BACKEND_URL + "api/rooms/" + p.data.slot.roomId)
+        .then(p => {
+          this.room = p.data.roomId;
+        });
     });
   },
   methods: {
