@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // Require  html-webpack-plugin plugin
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const webpack = require('webpack');
+var GitRevisionPlugin = require('git-revision-webpack-plugin')
 
 
 var apiHost;
@@ -11,6 +12,7 @@ var setupEnv = function(env) {
         case 'production':
             apiHost = JSON.stringify("http://floxxbackend.cleverapps.io/")
             wsHost = JSON.stringify("floxxbackend.cleverapps.io")
+
             break;
         case 'development':
             apiHost = JSON.stringify("http://localhost:8081/")
@@ -21,6 +23,8 @@ var setupEnv = function(env) {
             break;
     }
 }
+
+var gitRevisionPlugin = new GitRevisionPlugin();
 
 module.exports = env => {
     setupEnv(env);
@@ -39,7 +43,8 @@ module.exports = env => {
             new VueLoaderPlugin(),
             new webpack.DefinePlugin({
                 BACKEND_URL: apiHost,
-                WS_BACKEND_HOST: wsHost
+                WS_BACKEND_HOST: wsHost,
+                FLOXX_VERSION: JSON.stringify(gitRevisionPlugin.version())
             })
         ],
         devServer: { // configuration for webpack-dev-server

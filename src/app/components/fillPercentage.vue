@@ -104,6 +104,20 @@
 
 <script>
 import VueCircle from "vue2-circle-progress";
+
+function chooseColor(percentage) {
+  var p = _.toInteger(percentage);
+  if (p <= 40) {
+    return ["green"];
+  } else if (p > 40 && p <= 70) {
+    return ["orange"];
+  } else if (p > 70 && p <= 100) {
+    return ["red"];
+  } else {
+    return ["violet"];
+  }
+}
+
 export default {
   components: {
     VueCircle
@@ -140,6 +154,9 @@ export default {
         })
         .then(p => {
           this.$refs.lastValue.updateProgress(perc);
+          this.$refs.lastValue.updateFill({
+            gradient: chooseColor(perc)
+          });
         });
     }
   }

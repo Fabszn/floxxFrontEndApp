@@ -161,25 +161,47 @@
 <script>
 import VueCircle from "vue2-circle-progress";
 import _ from "lodash";
+
+function chooseColor(percentage) {
+  var p = _.toInteger(percentage);
+  if (p <= 30) {
+    return ["green"];
+  } else if (p > 30 && p <= 70) {
+    return ["blue"];
+  } else if (p > 70 && p <= 100) {
+    return ["red"];
+  } else {
+    return ["violet"];
+  }
+}
+
 function computeHit(percentage, key, refComponent) {
   var room = _.split(key, "_", 2)[1];
 
   if (room == "243") {
     refComponent._243.updateProgress(_.toInteger(percentage));
+    refComponent._243.updateFill({ gradient: chooseColor(percentage) });
   } else if (room == "Maillot") {
     refComponent._maillot.updateProgress(_.toInteger(percentage));
+    refComponent._maillot.updateFill({ gradient: chooseColor(percentage) });
   } else if (room == "Amphi bleu") {
     refComponent._amphiB.updateProgress(_.toInteger(percentage));
+    refComponent._amphiB.updateFill({ gradient: chooseColor(percentage) });
   } else if (room == "242") {
     refComponent._242.updateProgress(_.toInteger(percentage));
+    refComponent._242.updateFill({ gradient: chooseColor(percentage) });
   } else if (room == "241") {
     refComponent._241.updateProgress(_.toInteger(percentage));
+    refComponent._241.updateFill({ gradient: chooseColor(percentage) });
   } else if (room == "251") {
     refComponent._251.updateProgress(_.toInteger(percentage));
+    refComponent._251.updateFill({ gradient: chooseColor(percentage) });
   } else if (room == "252") {
     refComponent._252.updateProgress(_.toInteger(percentage));
+    refComponent._252.updateFill({ gradient: chooseColor(percentage) });
   } else if (room == "253") {
     refComponent._253.updateProgress(_.toInteger(percentage));
+    refComponent._253.updateFill({ gradient: chooseColor(percentage) });
   }
 }
 
@@ -226,11 +248,6 @@ export default {
   margin: 20px;
 }
 
-.separate {
-  border: 1px dashed white;
-  margin: 2px;
-  border-radius: 10px;
-}
 .block-green {
   display: block;
   width: 100%;
