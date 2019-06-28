@@ -167,7 +167,7 @@ function chooseColor(percentage) {
   if (p <= 30) {
     return ["green"];
   } else if (p > 30 && p <= 70) {
-    return ["blue"];
+    return ["orange"];
   } else if (p > 70 && p <= 100) {
     return ["red"];
   } else {
