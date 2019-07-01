@@ -157,6 +157,11 @@ export default {
           this.$refs.lastValue.updateFill({
             gradient: chooseColor(perc)
           });
+          this.$notify({
+            group: "foo",
+            title: "Important message",
+            text: "Hello user! This is a notification!"
+          });
         });
     }
   }

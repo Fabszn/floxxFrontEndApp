@@ -8,7 +8,9 @@ import { routes } from './routeur-config.js';
 import Dropdown from 'vue-simple-search-dropdown';
 import VueLodash from 'vue-lodash';
 import VueNativeSock from 'vue-native-websocket'
+import Notifications from 'vue-notification'
 import './floxxStyle.css'
+
 
 
 
@@ -19,6 +21,7 @@ Vue.use(Router);
 Vue.use(Dropdown);
 Vue.use(VueLodash);
 Vue.use(VueNativeSock, 'ws://' + WS_BACKEND_HOST + '/api/stream/hit', { format: 'json' })
+Vue.use(Notifications)
 
 Vue.component('dropdown', Dropdown)
 

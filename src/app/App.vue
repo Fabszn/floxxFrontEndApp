@@ -4,6 +4,7 @@
       <router-view></router-view>
     </div>
     <div class="version">v.{{version}}</div>
+    <notifications group="foo"/>
   </div>
 </template>
 

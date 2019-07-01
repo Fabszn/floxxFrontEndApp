@@ -1,5 +1,25 @@
 <template>
   <div class="container-fluid">
+    <div class="d-flex justify-content-around separate">
+      <div class="space">
+        <vue-circle
+          ref="_maillot"
+          v-bind:progress="0"
+          :size="100"
+          :reverse="false"
+          line-cap="round"
+          :fill="fill"
+          empty-fill="rgba(0, 0, 0, .1)"
+          :animation-start-value="0.0"
+          :start-angle="380"
+          insert-mode="append"
+          :thickness="5"
+          :show-percent="true"
+          @vue-circle-progress="progress"
+          @vue-circle-end="progress_end"
+        >Maillot</vue-circle>
+      </div>
+    </div>
     <div class="d-flex justify-content-around">
       <div class="flex-column separate">
         <div class="space">
@@ -134,25 +154,6 @@
           @vue-circle-progress="progress"
           @vue-circle-end="progress_end"
         >Amphi B.</vue-circle>
-      </div>
-
-      <div class="space">
-        <vue-circle
-          ref="_maillot"
-          v-bind:progress="0"
-          :size="100"
-          :reverse="false"
-          line-cap="round"
-          :fill="fill"
-          empty-fill="rgba(0, 0, 0, .1)"
-          :animation-start-value="0.0"
-          :start-angle="380"
-          insert-mode="append"
-          :thickness="5"
-          :show-percent="true"
-          @vue-circle-progress="progress"
-          @vue-circle-end="progress_end"
-        >Maillot</vue-circle>
       </div>
     </div>
   </div>
