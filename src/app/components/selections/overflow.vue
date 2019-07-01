@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
-    <div class="d-flex justify-content-around separate">
-      <div class="space">
+    <div class="d-flex justify-content-around separate-headfooter">
+      <div class="space-headerFooter">
         <vue-circle
           ref="_maillot"
           v-bind:progress="0"
@@ -136,8 +136,8 @@
       </div>
     </div>
 
-    <div class="d-flex justify-content-around separate">
-      <div class="space">
+    <div class="d-flex justify-content-around separate-headfooter">
+      <div class="space-headerFooter">
         <vue-circle
           ref="_amphiB"
           v-bind:progress="0"
@@ -246,7 +246,11 @@ export default {
 
 <style  scoped>
 .space {
-  margin: 20px;
+  margin: 5px;
+}
+
+.space-headerFooter {
+  margin: 5px;
 }
 
 .block-green {
