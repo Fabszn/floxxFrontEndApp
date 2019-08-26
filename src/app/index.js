@@ -10,11 +10,12 @@ import VueLodash from 'vue-lodash';
 import VueNativeSock from 'vue-native-websocket'
 import Notifications from 'vue-notification'
 import './floxxStyle.css'
+import async from 'async'
 
 
 
 
-
+Object.defineProperty(Vue.prototype, '$async', { value: async });
 
 Vue.use(VueResource);
 Vue.use(Router);
@@ -22,6 +23,7 @@ Vue.use(Dropdown);
 Vue.use(VueLodash);
 Vue.use(VueNativeSock, 'ws://' + WS_BACKEND_HOST + '/api/stream/hit', { format: 'json' })
 Vue.use(Notifications)
+
 
 Vue.component('dropdown', Dropdown)
 

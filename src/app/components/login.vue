@@ -9,7 +9,7 @@
           v-model="email"
           class="form-control"
           placeholder="Enter email"
-        >
+        />
       </div>
       <div class="form-group">
         <label for="mdp">Password</label>
@@ -19,7 +19,7 @@
           class="form-control"
           v-model="password"
           placeholder="Enter password"
-        >
+        />
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
@@ -35,9 +35,20 @@ module.exports = {
   },
   methods: {
     processForm: function() {
-      console.log({ name: this.email, email: this.password });
-      console.log(BACKEND_URL);
-      this.$router.push("/selectTypeConf");
+      this.$http
+        .post(BACKEND_URL + "api/login", {
+          login: JSON.stringify(this.email),
+          mdp: JSON.stringify(this.password)
+        })
+        .then(
+          r => {
+            console.log(r);
+            this.$router.push("/selectTypeConf");
+          },
+          r => {
+            console.log("error");
+          }
+        );
     }
   }
 };

@@ -1,161 +1,13 @@
 <template>
-  <div class="container-fluid">
-    <div class="d-flex justify-content-around separate">
-      <div class="space">
-        <vue-circle
-          ref="_maillot"
-          v-bind:progress="0"
-          :size="100"
-          :reverse="false"
-          line-cap="round"
-          :fill="fill"
-          empty-fill="rgba(0, 0, 0, .1)"
-          :animation-start-value="0.0"
-          :start-angle="380"
-          insert-mode="append"
-          :thickness="5"
-          :show-percent="true"
-          @vue-circle-progress="progress"
-          @vue-circle-end="progress_end"
-        >Maillot</vue-circle>
-      </div>
-    </div>
-    <div class="d-flex justify-content-around">
-      <div class="flex-column separate">
-        <div class="space">
-          <vue-circle
-            ref="_241"
-            v-bind:progress="0"
-            :size="100"
-            :reverse="false"
-            line-cap="round"
-            :fill="fill"
-            empty-fill="rgba(0, 0, 0, .1)"
-            :animation-start-value="0.0"
-            :start-angle="380"
-            insert-mode="append"
-            :thickness="5"
-            :show-percent="true"
-            @vue-circle-progress="progress"
-            @vue-circle-end="progress_end"
-          >241</vue-circle>
-        </div>
-        <div class="space">
-          <vue-circle
-            ref="_242"
-            v-bind:progress="0"
-            :size="100"
-            :reverse="false"
-            line-cap="round"
-            :fill="fill"
-            empty-fill="rgba(0, 0, 0, .1)"
-            :animation-start-value="0.0"
-            :start-angle="380"
-            insert-mode="append"
-            :thickness="5"
-            :show-percent="true"
-            @vue-circle-progress="progress"
-            @vue-circle-end="progress_end"
-          >242</vue-circle>
-        </div>
-        <div class="space">
-          <vue-circle
-            ref="_243"
-            v-bind:progress="0"
-            :size="100"
-            :reverse="false"
-            line-cap="round"
-            :fill="fill"
-            empty-fill="rgba(0, 0, 0, .1)"
-            :animation-start-value="0.0"
-            :start-angle="380"
-            insert-mode="append"
-            :thickness="5"
-            :show-percent="true"
-            @vue-circle-progress="progress"
-            @vue-circle-end="progress_end"
-          >243</vue-circle>
-        </div>
-      </div>
-
-      <div class="flex-column separate">
-        <div class="space">
-          <vue-circle
-            ref="_251"
-            v-bind:progress="0"
-            :size="100"
-            :reverse="false"
-            line-cap="round"
-            :fill="fill"
-            empty-fill="rgba(0, 0, 0, .1)"
-            :animation-start-value="0.0"
-            :start-angle="380"
-            insert-mode="append"
-            :thickness="5"
-            :show-percent="true"
-            @vue-circle-progress="progress"
-            @vue-circle-end="progress_end"
-          >251</vue-circle>
-        </div>
-        <div class="space">
-          <vue-circle
-            ref="_252"
-            v-bind:progress="0"
-            :size="100"
-            :reverse="false"
-            line-cap="round"
-            :fill="fill"
-            empty-fill="rgba(0, 0, 0, .1)"
-            :animation-start-value="0.0"
-            :start-angle="380"
-            insert-mode="append"
-            :thickness="5"
-            :show-percent="true"
-            @vue-circle-progress="progress"
-            @vue-circle-end="progress_end"
-          >252</vue-circle>
-        </div>
-        <div class="space">
-          <vue-circle
-            ref="_253"
-            v-bind:progress="0"
-            :size="100"
-            :reverse="false"
-            line-cap="round"
-            :fill="fill"
-            empty-fill="rgba(0, 0, 0, .1)"
-            :animation-start-value="0.0"
-            :start-angle="380"
-            insert-mode="append"
-            :thickness="5"
-            :show-percent="true"
-            @vue-circle-progress="progress"
-            @vue-circle-end="progress_end"
-          >253</vue-circle>
-        </div>
-      </div>
-    </div>
-
-    <div class="d-flex justify-content-around separate">
-      <div class="space">
-        <vue-circle
-          ref="_amphiB"
-          v-bind:progress="0"
-          :size="100"
-          :reverse="false"
-          line-cap="round"
-          :fill="fill"
-          empty-fill="rgba(0, 0, 0, .1)"
-          :animation-start-value="0.0"
-          :start-angle="380"
-          insert-mode="append"
-          :thickness="5"
-          :show-percent="true"
-          @vue-circle-progress="progress"
-          @vue-circle-end="progress_end"
-        >Amphi B.</vue-circle>
-      </div>
-    </div>
+  <div class="d-flex flex-column">
+    <div class="line">Hello worlf</div>
+    <div class="line">Hello worlf</div>
+    <div class="line">Hello worlf</div>
+    <div class="line">Hello worlf</div>
+    <div class="line">Hello worlf</div>
+    <div class="line">Hello worlf</div>
+    <div class="line">Hello worlf</div>
+    <div class="line">{{test}}</div>
   </div>
 </template>
 
@@ -212,11 +64,12 @@ export default {
   },
   data: function() {
     return {
-      fill: { gradient: ["green"] }
+      fill: { gradient: ["green"] },
+      test: ""
     };
   },
   created: function() {
-    this.$options.sockets.onmessage = msg => {
+    /*this.$options.sockets.onmessage = msg => {
       console.log(msg);
       if (!_.startsWith(msg.data, "Keep")) {
         var msgAsJson = JSON.parse(msg.data);
@@ -229,12 +82,35 @@ export default {
       } else {
         console.log("Keep alive");
       }
-    };
+    };*/
 
-    this.$http.get(BACKEND_URL + "api/tracks").then(p => {
-      _.mapKeys(p.data, (value, key) => {
-        computeHit(value.percentage, key, this.$refs);
-      });
+    this.$http.get(BACKEND_URL + "api/slots").then(p => {
+      this.$async.map(
+        p.data.slots,
+        (slots, cb) => {
+          this.$http.get(BACKEND_URL + "api/slots/" + slots.id).then(
+            resp => {
+              cb(null, resp.body.slot);
+            },
+            resp => {
+              cb(
+                "Error while loading slot " +
+                  resp.status +
+                  " - " +
+                  resp.statusText,
+                null
+              );
+            }
+          );
+        },
+        (e, result) => {
+          if (e) {
+            console.error(e);
+          } else {
+            this.test = result[0];
+          }
+        }
+      );
     });
   },
   methods: {
@@ -248,40 +124,8 @@ export default {
 .space {
   margin: 20px;
 }
-
-.block-green {
-  display: block;
+.line {
+  border: 1px solid gray;
   width: 100%;
-  border: none;
-  background-color: #4caf50;
-  padding: 14px 28px;
-  font-size: 16px;
-  cursor: pointer;
-  text-align: center;
-  margin-bottom: 4px;
-}
-
-.block-orange {
-  display: block;
-  width: 100%;
-  border: none;
-  background-color: #ffa500;
-  padding: 14px 28px;
-  font-size: 16px;
-  cursor: pointer;
-  text-align: center;
-  margin-bottom: 4px;
-}
-
-.block-red {
-  display: block;
-  width: 100%;
-  border: none;
-  background-color: red;
-  padding: 14px 28px;
-  font-size: 16px;
-  cursor: pointer;
-  text-align: center;
-  margin-bottom: 4px;
 }
 </style>
