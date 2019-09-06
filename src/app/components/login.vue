@@ -29,20 +29,23 @@
 module.exports = {
   data: function() {
     return {
-      email: "fa@br.cd",
-      password: "qsdd"
+      email: "admin@test.fr",
+      password: "123"
     };
   },
   methods: {
     processForm: function() {
       this.$http
-        .post(BACKEND_URL + "api/login", {
-          login: JSON.stringify(this.email),
-          mdp: JSON.stringify(this.password)
-        })
+        .post(
+          BACKEND_URL + "api/login",
+          JSON.stringify({
+            login: this.email,
+            mdp: this.password
+          })
+        )
         .then(
           r => {
-            console.log(r);
+            localStorage.setItem("token", r.body);
             this.$router.push("/selectTypeConf");
           },
           r => {
