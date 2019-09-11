@@ -52,8 +52,6 @@ module.exports = {
       this.$router.push("fill/" + this.slotId);
     },
     validateSelection: function(item) {
-      console.log(token);
-      console.log(token);
       this.$http.get(BACKEND_URL + "api/slots/" + item.id).then(p => {
         this.title = p.data.slot.talk.title;
         this.talkType = p.data.slot.talk.talkType;
