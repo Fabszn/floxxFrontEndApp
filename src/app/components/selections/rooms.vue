@@ -34,9 +34,17 @@ module.exports = {
     };
   },
   created() {
-    this.$http.get(BACKEND_URL + "api/slots").then(p => {
-      this.slots = p.data.slots;
-    });
+    var token = localStorage.getItem("token");
+    this.$http
+      .get(BACKEND_URL + "api/slots", {
+        headers: {
+          Authorization: "Bearer " + token,
+          Accept: "application/json"
+        }
+      })
+      .then(p => {
+        this.slots = p.data.slots;
+      });
   },
   methods: {
     selectSlot: function() {
@@ -44,6 +52,8 @@ module.exports = {
       this.$router.push("fill/" + this.slotId);
     },
     validateSelection: function(item) {
+      console.log(token);
+      console.log(token);
       this.$http.get(BACKEND_URL + "api/slots/" + item.id).then(p => {
         this.title = p.data.slot.talk.title;
         this.talkType = p.data.slot.talk.talkType;
