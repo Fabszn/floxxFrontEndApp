@@ -231,11 +231,18 @@ export default {
       }
     };
 
-    this.$http.get(BACKEND_URL + "api/tracks").then(p => {
-      _.mapKeys(p.data, (value, key) => {
-        computeHit(value.percentage, key, this.$refs);
+    this.$http
+      .get(BACKEND_URL + "api/tracks", {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+          Accept: "application/json"
+        }
+      })
+      .then(p => {
+        _.mapKeys(p.data, (value, key) => {
+          computeHit(value.percentage, key, this.$refs);
+        });
       });
-    });
   },
   methods: {
     progress_end: function() {},

@@ -133,25 +133,46 @@ export default {
   },
   created() {
     var itemId = this.$route.params.slotid;
-    this.$http.get(BACKEND_URL + "api/slots/" + itemId).then(p => {
-      this.title = p.data.slot.talk.title;
-      this.talkType = p.data.slot.talk.talkType;
-      this.$http
-        .get(BACKEND_URL + "api/rooms/" + p.data.slot.roomId)
-        .then(p => {
-          this.room = p.data.roomId;
-        });
-    });
+    this.$http
+      .get(BACKEND_URL + "api/slots/" + itemId, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+          Accept: "application/json"
+        }
+      })
+      .then(p => {
+        this.title = p.data.slot.talk.title;
+        this.talkType = p.data.slot.talk.talkType;
+        this.$http
+          .get(BACKEND_URL + "api/rooms/" + p.data.slot.roomId, {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token"),
+              Accept: "application/json"
+            }
+          })
+          .then(p => {
+            this.room = p.data.roomId;
+          });
+      });
   },
   methods: {
     progress_end: function() {},
     progress: function() {},
     hit: function(perc) {
       this.$http
-        .post(BACKEND_URL + "api/hit", {
-          hitSlotId: this.$route.params.slotid,
-          percentage: JSON.stringify(perc)
-        })
+        .post(
+          BACKEND_URL + "api/hit",
+          {
+            hitSlotId: this.$route.params.slotid,
+            percentage: JSON.stringify(perc)
+          },
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token"),
+              Accept: "application/json"
+            }
+          }
+        )
         .then(p => {
           this.$refs.lastValue.updateProgress(perc);
           this.$refs.lastValue.updateFill({

@@ -52,11 +52,19 @@ module.exports = {
       this.$router.push("fill/" + this.slotId);
     },
     validateSelection: function(item) {
-      this.$http.get(BACKEND_URL + "api/slots/" + item.id).then(p => {
-        this.title = p.data.slot.talk.title;
-        this.talkType = p.data.slot.talk.talkType;
-        this.slotId = item.id;
-      });
+      var token = localStorage.getItem("token");
+      this.$http
+        .get(BACKEND_URL + "api/slots/" + item.id, {
+          headers: {
+            Authorization: "Bearer " + token,
+            Accept: "application/json"
+          }
+        })
+        .then(p => {
+          this.title = p.data.slot.talk.title;
+          this.talkType = p.data.slot.talk.talkType;
+          this.slotId = item.id;
+        });
     },
     getDropdownValues: function(p) {}
   }
