@@ -164,7 +164,7 @@ export default {
           BACKEND_URL + "api/hit",
           {
             hitSlotId: this.$route.params.slotid,
-            percentage: JSON.stringify(perc)
+            percentage: perc
           },
           {
             headers: {
