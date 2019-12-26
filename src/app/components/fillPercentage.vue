@@ -131,16 +131,7 @@ export default {
       .then(p => {
         this.title = p.data.slot.talk.title;
         this.talkType = p.data.slot.talk.talkType;
-        this.$http
-          .get(BACKEND_URL + "api/rooms/" + p.data.slot.roomId, {
-            headers: {
-              Authorization: "Bearer " + localStorage.getItem("token"),
-              Accept: "application/json"
-            }
-          })
-          .then(p => {
-            this.room = p.data.roomId;
-          });
+        this.room = p.data.slot.roomId;
       });
   },
   methods: {

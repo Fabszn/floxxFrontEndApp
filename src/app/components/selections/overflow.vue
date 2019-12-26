@@ -166,42 +166,42 @@ import _ from "lodash";
 function computeHit(percentage, key, refComponent) {
   var room = _.split(key, "_", 2)[1];
 
-  if (room == "243") {
+  if (key.includes("par243")) {
     refComponent._243.updateProgress(_.toInteger(percentage));
     refComponent._243.updateFill({
       gradient: shared.colorByPercentage(percentage)
     });
-  } else if (room == "Maillot") {
+  } else if (key.includes("c_maillot")) {
     refComponent._maillot.updateProgress(_.toInteger(percentage));
     refComponent._maillot.updateFill({
       gradient: shared.colorByPercentage(percentage)
     });
-  } else if (room == "Amphi bleu") {
+  } else if (key.includes("b_amphi")) {
     refComponent._amphiB.updateProgress(_.toInteger(percentage));
     refComponent._amphiB.updateFill({
       gradient: shared.colorByPercentage(percentage)
     });
-  } else if (room == "242") {
+  } else if (key.includes("par242AB")) {
     refComponent._242.updateProgress(_.toInteger(percentage));
     refComponent._242.updateFill({
       gradient: shared.colorByPercentage(percentage)
     });
-  } else if (room == "241") {
+  } else if (key.includes("par241")) {
     refComponent._241.updateProgress(_.toInteger(percentage));
     refComponent._241.updateFill({
       gradient: shared.colorByPercentage(percentage)
     });
-  } else if (room == "251") {
+  } else if (key.includes("f_neu251")) {
     refComponent._251.updateProgress(_.toInteger(percentage));
     refComponent._251.updateFill({
       gradient: shared.colorByPercentage(percentage)
     });
-  } else if (room == "252") {
+  } else if (key.includes("e_neu252")) {
     refComponent._252.updateProgress(_.toInteger(percentage));
     refComponent._252.updateFill({
       gradient: shared.colorByPercentage(percentage)
     });
-  } else if (room == "253") {
+  } else if (key.includes("neu253")) {
     refComponent._253.updateProgress(_.toInteger(percentage));
     refComponent._253.updateFill({
       gradient: shared.colorByPercentage(percentage)
@@ -220,15 +220,11 @@ export default {
   },
   created: function() {
     this.$options.sockets.onmessage = msg => {
-      console.log(msg);
       if (!_.startsWith(msg.data, "Keep")) {
         var msgAsJson = JSON.parse(msg.data);
+        console.log("MESSAGE" + msgAsJson.hitSlotId);
 
-        computeHit(
-          JSON.parse(msgAsJson.hit).percentage,
-          JSON.parse(msgAsJson.hit).hitSlotId,
-          this.$refs
-        );
+        computeHit(msgAsJson.percentage, msgAsJson.hitSlotId, this.$refs);
       } else {
         console.log("Keep alive");
       }

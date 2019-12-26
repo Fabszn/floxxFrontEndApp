@@ -45,7 +45,7 @@ module.exports = {
         )
         .then(
           r => {
-            localStorage.setItem("token", r.body);
+            localStorage.setItem("token", r.body.token);
             this.$router.push("/selectTypeConf");
           },
           r => {
