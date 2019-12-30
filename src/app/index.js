@@ -21,7 +21,7 @@ Vue.use(VueResource);
 Vue.use(Router);
 Vue.use(Dropdown);
 Vue.use(VueLodash);
-Vue.use(VueNativeSock, 'wss://' + WS_BACKEND_HOST + '/api/stream/hit', { format: 'json' })
+Vue.use(VueNativeSock, WS_BACKEND_HOST + '/api/stream/hit', { format: 'json' })
 Vue.use(Notifications)
 
 
