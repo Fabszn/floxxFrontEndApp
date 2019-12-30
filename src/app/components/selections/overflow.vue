@@ -232,10 +232,7 @@ export default {
 
     this.$http
       .get(BACKEND_URL + "api/tracks", {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-          Accept: "application/json"
-        }
+        headers: shared.tokenHandle()
       })
       .then(p => {
         _.mapKeys(p.data, (value, key) => {

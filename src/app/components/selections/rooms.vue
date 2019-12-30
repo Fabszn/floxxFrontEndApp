@@ -37,10 +37,7 @@ module.exports = {
     var token = localStorage.getItem("token");
     this.$http
       .get(BACKEND_URL + "api/slots", {
-        headers: {
-          Authorization: "Bearer " + token,
-          Accept: "application/json"
-        }
+        headers: shared.tokenHandle()
       })
       .then(p => {
         this.slots = p.data.slots;
@@ -55,10 +52,7 @@ module.exports = {
       var token = localStorage.getItem("token");
       this.$http
         .get(BACKEND_URL + "api/slots/" + item.id, {
-          headers: {
-            Authorization: "Bearer " + token,
-            Accept: "application/json"
-          }
+          headers: shared.tokenHandle()
         })
         .then(p => {
           this.title = p.data.slot.talk.title;

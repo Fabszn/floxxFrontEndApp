@@ -15,7 +15,7 @@ var setupEnv = function(env) {
             break;
         case 'development':
             apiHost = JSON.stringify("http://localhost:8081/")
-            wsHost = JSON.stringify("localhost:8081")
+            wsHost = JSON.stringify("ws://localhost:8081")
             break;
         default:
             apiHost = JSON.stringify("Not defined")

@@ -123,10 +123,7 @@ export default {
     var itemId = this.$route.params.slotid;
     this.$http
       .get(BACKEND_URL + "api/slots/" + itemId, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-          Accept: "application/json"
-        }
+        headers: shared.tokenHandle()
       })
       .then(p => {
         this.title = p.data.slot.talk.title;
@@ -146,10 +143,7 @@ export default {
             percentage: perc
           },
           {
-            headers: {
-              Authorization: "Bearer " + localStorage.getItem("token"),
-              Accept: "application/json"
-            }
+            headers: shared.tokenHandle()
           }
         )
         .then(p => {

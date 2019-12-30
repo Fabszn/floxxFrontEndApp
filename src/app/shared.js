@@ -11,5 +11,13 @@ export default {
         } else {
             return ["violet"];
         }
+    },
+
+    tokenHandle: function th() {
+        var token = localStorage.getItem("token");
+        return {
+            Authorization: "Bearer " + token,
+            Accept: "application/json"
+        }
     }
 }
