@@ -153,6 +153,7 @@ export default {
           });
           this.$notify({
             group: "foo",
+            type: "success",
             title: "Important message",
             text: "Hello user! This is a notification!"
           });

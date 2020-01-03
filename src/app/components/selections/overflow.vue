@@ -1,6 +1,9 @@
 <template>
   <div class="container-fluid">
     <div class="d-flex justify-content-around separate-headfooter">
+      <button v-on:click="refresh" class="btn btn-primary">Refresh</button>
+    </div>
+    <div class="d-flex justify-content-around separate-headfooter">
       <div class="space-headerFooter">
         <vue-circle
           ref="_maillot"
@@ -165,6 +168,7 @@ import _ from "lodash";
 
 function computeHit(percentage, key, refComponent) {
   var room = _.split(key, "_", 2)[1];
+  console.log("computehit");
 
   if (key.includes("par243")) {
     refComponent._243.updateProgress(_.toInteger(percentage));
@@ -222,8 +226,6 @@ export default {
     this.$options.sockets.onmessage = msg => {
       if (!_.startsWith(msg.data, "Keep")) {
         var msgAsJson = JSON.parse(msg.data);
-        console.log("MESSAGE" + msgAsJson.hitSlotId);
-
         computeHit(msgAsJson.percentage, msgAsJson.hitSlotId, this.$refs);
       } else {
         console.log("Keep alive");
@@ -242,7 +244,18 @@ export default {
   },
   methods: {
     progress_end: function() {},
-    progress: function() {}
+    progress: function() {},
+    refresh: function() {
+      this.$http
+        .get(BACKEND_URL + "api/tracks", {
+          headers: shared.tokenHandle()
+        })
+        .then(p => {
+          _.mapKeys(p.data, (value, key) => {
+            computeHit(value.percentage, key, this.$refs);
+          });
+        });
+    }
   }
 };
 </script>

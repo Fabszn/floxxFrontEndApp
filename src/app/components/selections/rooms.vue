@@ -24,7 +24,9 @@
 </template>
 
 <script>
-module.exports = {
+import shared from "../../shared";
+
+export default {
   data: function() {
     return {
       slots: [],
