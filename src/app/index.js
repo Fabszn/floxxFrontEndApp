@@ -11,6 +11,7 @@ import VueNativeSock from 'vue-native-websocket'
 import Notifications from 'vue-notification'
 import './floxxStyle.css'
 import async from 'async'
+import VModal from 'vue-js-modal'
 
 
 
@@ -23,6 +24,7 @@ Vue.use(Dropdown);
 Vue.use(VueLodash);
 Vue.use(VueNativeSock, WS_BACKEND_HOST + '/api/stream/hit', { format: 'json' })
 Vue.use(Notifications)
+Vue.use(VModal)
 
 
 Vue.component('dropdown', Dropdown)

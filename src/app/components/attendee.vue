@@ -1,7 +1,8 @@
 <template>
   <div class="container-fluid">
+    <modal name="hello-world">hello, world!</modal>
     <div class="d-flex justify-content-around separate-headfooter">
-      <button v-on:click="refresh" class="btn btn-primary">Refresh</button>
+      <button v-on:click="show" class="btn btn-primary">Refresh</button>
     </div>
     <div class="d-flex justify-content-around separate-headfooter">
       <div class="space-headerFooter">
@@ -193,6 +194,12 @@ export default {
           shared.computeHit(value.percentage, key, this.$refs);
         });
       });
+    },
+    show: function() {
+      this.$modal.show("hello-world");
+    },
+    hide: function() {
+      this.$modal.hide("hello-world");
     }
   }
 };
