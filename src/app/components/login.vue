@@ -1,5 +1,6 @@
 <template>
   <div class="container-fluid">
+    <div id="errorlogin" class="errorMsg" :hidden="loginFailedMsg">Authentification Failed</div>
     <form id="signup-form" @submit.prevent="processForm">
       <div class="form-group">
         <label for="login">Email address</label>
@@ -30,7 +31,8 @@ module.exports = {
   data: function() {
     return {
       email: "admin@test.fr",
-      password: "123"
+      password: "123",
+      loginFailedMsg: true
     };
   },
   methods: {
@@ -49,7 +51,7 @@ module.exports = {
             this.$router.push("/selectTypeConf");
           },
           r => {
-            console.log("error");
+            this.loginFailedMsg = false;
           }
         );
     }
@@ -58,5 +60,13 @@ module.exports = {
 </script>
 
 <style>
+.errorMsg {
+  background-color: red;
+  font-size: 16px;
+  color: whitesmoke;
+  text-align: center;
+  margin: 17px 13px 14px 10px;
+  padding: 10px 0px 10px 0px;
+}
 </style>
 
