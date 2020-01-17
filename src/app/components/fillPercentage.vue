@@ -152,7 +152,7 @@ export default {
             gradient: shared.colorByPercentage(perc)
           });
           this.$notify({
-            group: "foo",
+            group: "floxx",
             type: "success",
             title: "Success",
             text: "Percentage has been registered"
