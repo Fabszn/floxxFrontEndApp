@@ -1,11 +1,13 @@
 <template>
   <div class="container-fluid">
-    <modal name="hello-world">hello, world!</modal>
+    <modal name="hello-world" @before-open="beforeOpen" :adaptive="true">
+      <div class="talkdetails">hello, world! {{confTitle}}</div>
+    </modal>
     <div class="d-flex justify-content-around separate-headfooter">
-      <button v-on:click="show" class="btn btn-primary">Refresh</button>
+      <button v-on:click="refresh" class="btn btn-primary">Refresh</button>
     </div>
     <div class="d-flex justify-content-around separate-headfooter">
-      <div class="space-headerFooter">
+      <div class="space-headerFooter" v-on:click="show">
         <vue-circle
           ref="_maillot"
           v-bind:progress="0"
@@ -26,7 +28,7 @@
     </div>
     <div class="d-flex justify-content-around">
       <div class="flex-column separate">
-        <div class="space">
+        <div class="space" v-on:click="show">
           <vue-circle
             ref="_241"
             v-bind:progress="0"
@@ -174,7 +176,8 @@ export default {
   data: function() {
     return {
       hits: {},
-      fill: { gradient: ["green"] }
+      fill: { gradient: ["green"] },
+      confTitle: ""
     };
   },
   created: function() {
@@ -190,22 +193,29 @@ export default {
     refresh: function() {
       this.$http.get(BACKEND_URL + "api/attendees").then(p => {
         _.mapKeys(p.data, (value, key) => {
-          console.log("p.data" + p.data);
+          //console.log("p.data" + p.data);
           shared.computeHit(value.percentage, key, this.$refs);
         });
       });
     },
     show: function() {
-      this.$modal.show("hello-world");
+      this.$modal.show("hello-world", { foo: "Michel" });
     },
     hide: function() {
       this.$modal.hide("hello-world");
+    },
+    beforeOpen(event) {
+      console.log(event.params.foo);
+      this.confTitle = event.params.foo;
     }
   }
 };
 </script>
 
 <style  scoped>
+.talkdetails {
+  color: black;
+}
 .space {
   margin: 20px;
 }
