@@ -1,13 +1,22 @@
 <template>
   <div class="container-fluid">
-    <modal name="hello-world" @before-open="beforeOpen" :adaptive="true">
-      <div class="talkdetails">hello, world! {{confTitle}}</div>
+    <modal
+      name="hello-world"
+      @before-open="beforeOpen"
+      @before-close="beforeClose"
+      :adaptive="true"
+    >
+      <div class="talkdetails bg-light text-muted">
+        <p>{{confTitle}}</p>
+        <p>{{confKind}}</p>
+        <p>{{room}}</p>
+      </div>
     </modal>
     <div class="d-flex justify-content-around separate-headfooter">
       <button v-on:click="refresh" class="btn btn-primary">Refresh</button>
     </div>
     <div class="d-flex justify-content-around separate-headfooter">
-      <div class="space-headerFooter" v-on:click="show">
+      <div class="space-headerFooter" v-on:click="show('c_maillot')">
         <vue-circle
           ref="_maillot"
           v-bind:progress="0"
@@ -28,7 +37,7 @@
     </div>
     <div class="d-flex justify-content-around">
       <div class="flex-column separate">
-        <div class="space" v-on:click="show">
+        <div class="space" v-on:click="show('par241')">
           <vue-circle
             ref="_241"
             v-bind:progress="0"
@@ -46,7 +55,7 @@
             @vue-circle-end="progress_end"
           >241</vue-circle>
         </div>
-        <div class="space">
+        <div class="space" v-on:click="show('par242AB')">
           <vue-circle
             ref="_242"
             v-bind:progress="0"
@@ -64,7 +73,7 @@
             @vue-circle-end="progress_end"
           >242</vue-circle>
         </div>
-        <div class="space">
+        <div class="space" v-on:click="show('par243')">
           <vue-circle
             ref="_243"
             v-bind:progress="0"
@@ -85,7 +94,7 @@
       </div>
 
       <div class="flex-column separate">
-        <div class="space">
+        <div class="space" v-on:click="show('f_neu251')">
           <vue-circle
             ref="_251"
             v-bind:progress="0"
@@ -103,7 +112,7 @@
             @vue-circle-end="progress_end"
           >251</vue-circle>
         </div>
-        <div class="space">
+        <div class="space" v-on:click="show('e_neu252')">
           <vue-circle
             ref="_252"
             v-bind:progress="0"
@@ -121,7 +130,7 @@
             @vue-circle-end="progress_end"
           >252</vue-circle>
         </div>
-        <div class="space">
+        <div class="space" v-on:click="show('neu253')">
           <vue-circle
             ref="_253"
             v-bind:progress="0"
@@ -142,7 +151,7 @@
       </div>
     </div>
     <div class="d-flex justify-content-around separate-headfooter">
-      <div class="space-headerFooter">
+      <div class="space-headerFooter" v-on:click="show('b_amphi')">
         <vue-circle
           ref="_amphiB"
           v-bind:progress="0"
@@ -169,44 +178,72 @@ import VueCircle from "vue2-circle-progress";
 import _ from "lodash";
 import shared from "../shared";
 
+function attendees(refComponent) {
+  refComponent.$http.get(BACKEND_URL + "api/attendees").then(p => {
+    refComponent.hits = p.data.hits;
+    _.forEach(_.values(p.data.hits), value => {
+      if (!_.isNull(value.hitInfo)) {
+        shared.computeHit(
+          value.hitInfo.percentage,
+          value.hitInfo.hitSlotId,
+          refComponent.$refs
+        );
+      }
+    });
+  });
+}
+
+function findKey(idSlotComp, refComp) {
+  return _.find(_.keys(refComp.hits), function(key) {
+    return key.includes(idSlotComp);
+  });
+}
+
 export default {
   components: {
     VueCircle
   },
   data: function() {
     return {
-      hits: {},
+      hits: [],
       fill: { gradient: ["green"] },
-      confTitle: ""
+      confTitle: "",
+      confAbstract: "",
+      confKind: "",
+      room: ""
     };
   },
   created: function() {
-    this.$http.get(BACKEND_URL + "api/attendees").then(p => {
-      _.mapKeys(p.data, (value, key) => {
-        this.hits = p.data;
-      });
-    });
+    attendees(this);
   },
   methods: {
     progress_end: function() {},
     progress: function() {},
     refresh: function() {
-      this.$http.get(BACKEND_URL + "api/attendees").then(p => {
-        _.mapKeys(p.data, (value, key) => {
-          //console.log("p.data" + p.data);
-          shared.computeHit(value.percentage, key, this.$refs);
-        });
-      });
+      attendees(this);
     },
-    show: function() {
-      this.$modal.show("hello-world", { foo: "Michel" });
+    show(idslot) {
+      this.$modal.show("hello-world", { idSlot: idslot });
     },
     hide: function() {
       this.$modal.hide("hello-world");
     },
     beforeOpen(event) {
-      console.log(event.params.foo);
-      this.confTitle = event.params.foo;
+      var key = findKey(event.params.idSlot, this);
+      var current = this.hits[key];
+      if (!_.isUndefined(current)) {
+        console.log(current);
+        this.confTitle = current.slot.talk.title;
+        this.confKind = current.slot.talk.talkType;
+        this.room = current.slot.roomId;
+      } else {
+        this.confTitle = "no talk currently in this room";
+      }
+    },
+    beforeClose: function() {
+      this.confTitle = "";
+      this.confKind = "";
+      this.room = "";
     }
   }
 };
@@ -214,7 +251,8 @@ export default {
 
 <style  scoped>
 .talkdetails {
-  color: black;
+  width: 100%;
+  height: 100%;
 }
 .space {
   margin: 20px;
