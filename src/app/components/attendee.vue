@@ -180,8 +180,10 @@ import shared from "../shared";
 
 function attendees(refComponent) {
   refComponent.$http.get(BACKEND_URL + "api/attendees").then(p => {
-    refComponent.hits = p.data.hits;
-    _.forEach(_.values(p.data.hits), value => {
+    console.log(p.data);
+    refComponent.hits = p.data;
+
+    _.forEach(_.values(p.data), value => {
       if (!_.isNull(value.hitInfo)) {
         shared.computeHit(
           value.hitInfo.percentage,
@@ -232,7 +234,6 @@ export default {
       var key = findKey(event.params.idSlot, this);
       var current = this.hits[key];
       if (!_.isUndefined(current)) {
-        console.log(current);
         this.confTitle = current.slot.talk.title;
         this.confKind = current.slot.talk.talkType;
         this.room = current.slot.roomId;
