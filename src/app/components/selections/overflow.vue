@@ -1,13 +1,13 @@
 <template>
-  <div class="container-fluid">
-    <vue-scroll
-      ref="vs"
-      :ops="ops"
-      @refresh-start="handleRS"
-      @load-before-deactivate="handleLBD"
-      @refresh-before-deactivate="handleRBD"
-      @load-start="handleLoadStart"
-    >
+  <vue-scroll
+    ref="vs"
+    :ops="ops"
+    @refresh-start="handleRS"
+    @load-before-deactivate="handleLBD"
+    @refresh-before-deactivate="handleRBD"
+    @load-start="handleLoadStart"
+  >
+    <div class="container-fluid">
       <div class="d-flex justify-content-around separate-headfooter">
         <div class="space-headerFooter">
           <vue-circle
@@ -143,7 +143,6 @@
           </div>
         </div>
       </div>
-
       <div class="d-flex justify-content-around separate-headfooter">
         <div class="space-headerFooter">
           <vue-circle
@@ -164,8 +163,8 @@
           >Amphi B.</vue-circle>
         </div>
       </div>
-    </vue-scroll>
-  </div>
+    </div>
+  </vue-scroll>
 </template>
 <script>
 import shared from "../../shared";
@@ -231,7 +230,6 @@ export default {
 
           done();
         });
-
       console.log("RS");
     },
     handleLBD: function(vsInstance, refreshDom, done) {
