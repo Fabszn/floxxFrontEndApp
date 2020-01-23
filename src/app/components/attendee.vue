@@ -7,9 +7,9 @@
       :adaptive="true"
     >
       <div class="talkdetails bg-light text-muted">
-        <p>{{confTitle}}</p>
-        <p>{{confKind}}</p>
-        <p>{{room}}</p>
+        <p>Titre : {{confTitle}}</p>
+        <p>Type conférence : {{confKind}}</p>
+        <p>Salle : {{room}}</p>
       </div>
     </modal>
     <div class="d-flex justify-content-around separate-headfooter">
