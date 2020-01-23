@@ -12,6 +12,7 @@ import Notifications from 'vue-notification'
 import './floxxStyle.css'
 import async from 'async'
 import VModal from 'vue-js-modal'
+import vuescroll from 'vuescroll';
 
 
 
@@ -25,6 +26,7 @@ Vue.use(VueLodash);
 Vue.use(VueNativeSock, WS_BACKEND_HOST + '/api/stream/hit', { format: 'json' })
 Vue.use(Notifications)
 Vue.use(VModal)
+Vue.use(vuescroll)
 
 
 Vue.component('dropdown', Dropdown)
