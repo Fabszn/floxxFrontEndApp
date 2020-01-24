@@ -9,6 +9,10 @@ var apiHost;
 var setupEnv = function(env) {
     console.log("setup Env " + env["NODE_ENV"])
     switch (env["NODE_ENV"]) {
+        case 'staging':
+            apiHost = JSON.stringify("https://floxxbackend-staging.cleverapps.io/")
+            wsHost = JSON.stringify("wss://floxxbackend-staging.cleverapps.io")
+            break;
         case 'production':
             apiHost = JSON.stringify("https://floxxbackend.cleverapps.io/")
             wsHost = JSON.stringify("wss://floxxbackend.cleverapps.io")
