@@ -39,7 +39,7 @@
     },
     "scripts": {
         "install": " webpack  --progress ",
-        "start-dev": "webpack-dev-server --history-api-fallback --inline --progress --env.PLATFORM=development",
+        "start-dev": "webpack-dev-server --history-api-fallback --inline --progress",
         "start": "node ./server.js"
     }
 }
