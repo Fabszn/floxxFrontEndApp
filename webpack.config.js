@@ -7,8 +7,8 @@ var GitRevisionPlugin = require('git-revision-webpack-plugin')
 var apiHost;
 
 var setupEnv = function(env) {
-    console.log("setup Env " + env["NODE_ENV"])
-    switch (env["NODE_ENV"]) {
+    console.log("setup NODE_ENV " + process.env["NODE_ENV"])
+    switch (process.env["NODE_ENV"]) {
         case 'staging':
             apiHost = JSON.stringify("https://floxxbackend-staging.cleverapps.io/")
             wsHost = JSON.stringify("wss://floxxbackend-staging.cleverapps.io")
