@@ -30,8 +30,8 @@
 module.exports = {
   data: function() {
     return {
-      email: "admin@test.fr",
-      password: "123",
+      email: "",
+      password: "",
       loginFailedMsg: true
     };
   },
