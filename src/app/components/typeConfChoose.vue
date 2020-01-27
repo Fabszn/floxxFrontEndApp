@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <p>Choose type of conf</p>
+      <p>What do you want do to ?</p>
     </div>
     <div class="container-fluid">
       <div class="row">
