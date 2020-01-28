@@ -22,3 +22,6 @@ Floxx is deployed has 3 environments :
     - Staging : Personal clever cloud account -> ** floxx-staging.cleverapps.io **
     - Production : Devoxx clever cloud account -> ** floxx.cleverapps.io **
 
+# Releases
+
+    - v0.0.1
