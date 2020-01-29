@@ -2,7 +2,6 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import VueResource from 'vue-resource';
 import App from './App.vue';
-import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { routes } from './routeur-config.js';
 import Dropdown from 'vue-simple-search-dropdown';
@@ -13,10 +12,13 @@ import './floxxStyle.css'
 import async from 'async'
 import VModal from 'vue-js-modal'
 import vuescroll from 'vuescroll';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faSync, faSignInAlt } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 
 
-
+library.add(faSignInAlt, faSync)
 Object.defineProperty(Vue.prototype, '$async', { value: async });
 
 Vue.use(VueResource);
@@ -30,6 +32,7 @@ Vue.use(vuescroll)
 
 
 Vue.component('dropdown', Dropdown)
+Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 console.log(BACKEND_URL)
 console.log(process.env["NODE_ENV"])
