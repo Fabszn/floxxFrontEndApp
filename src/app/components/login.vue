@@ -22,7 +22,11 @@
           placeholder="Enter password"
         />
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+
+      <button type="submit" class="btn btn-primary">
+        Submit &nbsp;
+        <font-awesome-icon icon="sign-in-alt" />
+      </button>
     </form>
   </div>
 </template>
