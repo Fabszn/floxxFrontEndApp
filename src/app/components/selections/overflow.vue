@@ -1,7 +1,13 @@
 <template>
   <div class="container-fluid">
-    <div v-on:click="refresh">
-      <font-awesome-icon icon="sync" />
+    <div class="d-flex justify-content-around separate-headfooter">
+      <div v-on:click="backRooms">
+        <font-awesome-icon icon="arrow-circle-left" />
+      </div>
+
+      <div v-on:click="refresh">
+        <font-awesome-icon icon="sync" />
+      </div>
     </div>
 
     <modal
@@ -247,6 +253,9 @@ export default {
       this.confTitle = "";
       this.confKind = "";
       this.room = "";
+    },
+    backRooms: function() {
+      this.$router.push("/rooms");
     }
   }
 };
