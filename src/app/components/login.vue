@@ -52,7 +52,7 @@ module.exports = {
         .then(
           r => {
             localStorage.setItem("token", r.body.token);
-            this.$router.push("/selectTypeConf");
+            this.$router.push("/menu");
           },
           r => {
             this.loginFailedMsg = false;

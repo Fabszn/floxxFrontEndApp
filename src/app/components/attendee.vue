@@ -5,7 +5,7 @@
     </div>
 
     <modal
-      name="hello-world"
+      name="slot-details"
       @before-open="beforeOpen"
       @before-close="beforeClose"
       :adaptive="true"
@@ -227,7 +227,7 @@ export default {
       attendees(this);
     },
     show(idslot) {
-      this.$modal.show("hello-world", { idSlot: idslot });
+      this.$modal.show("slot-details", { idSlot: idslot });
     },
     hide: function() {
       this.$modal.hide("hello-world");

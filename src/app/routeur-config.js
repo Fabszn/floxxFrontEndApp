@@ -1,18 +1,19 @@
 import login from './components/login.vue'
-import choose from './components/typeConfChoose.vue'
+import menu from './components/menu.vue'
 import overflow from './components/selections/overflow.vue'
 import rooms from './components/selections/rooms.vue'
 import fill from './components/fillPercentage.vue'
 import metrics from './components/metrics.vue'
 import attendee from './components/attendee.vue'
+import statistiques from './components/statistiques.vue'
 
 export const routes = [{
     path: '/',
     component: login,
     children: [],
 }, {
-    path: '/selectTypeConf',
-    component: choose,
+    path: '/menu',
+    component: menu,
     children: [],
 }, {
     path: '/rooms',
@@ -33,5 +34,9 @@ export const routes = [{
 }, {
     path: '/attendee',
     component: attendee,
+    children: [],
+}, {
+    path: '/stattisques',
+    component: statistiques,
     children: [],
 }];

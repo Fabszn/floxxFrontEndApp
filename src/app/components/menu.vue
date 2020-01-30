@@ -19,6 +19,16 @@
           >Overflow</button>
         </div>
       </div>
+      <div class="row">&nbsp;</div>
+      <div class="row">
+        <div class="col-12">
+          <button
+            type="button"
+            class="btn btn-secondary btn-lg block"
+            v-on:click="navToStat"
+          >statistiques</button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -30,6 +40,9 @@ module.exports = {
     },
     navToOverf: function() {
       this.$router.push("/overflow");
+    },
+    navToStat: function() {
+      this.$router.push("/statistiques");
     }
   }
 };

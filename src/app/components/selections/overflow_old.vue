@@ -3,21 +3,8 @@
     <div v-on:click="refresh">
       <font-awesome-icon icon="sync" />
     </div>
-
-    <modal
-      name="slot-details"
-      @before-open="beforeOpen"
-      @before-close="beforeClose"
-      :adaptive="true"
-    >
-      <div class="talkdetails bg-light text-muted">
-        <p>Titre : {{confTitle}}</p>
-        <p>Type conférence : {{confKind}}</p>
-        <p>Salle : {{room}}</p>
-      </div>
-    </modal>
     <div class="d-flex justify-content-around separate-headfooter">
-      <div class="space-headerFooter" v-on:click="show('c_maillot')">
+      <div class="space-headerFooter">
         <vue-circle
           ref="_maillot"
           v-bind:progress="0"
@@ -38,7 +25,7 @@
     </div>
     <div class="d-flex justify-content-around">
       <div class="flex-column separate">
-        <div class="space" v-on:click="show('par241')">
+        <div class="space">
           <vue-circle
             ref="_241"
             v-bind:progress="0"
@@ -56,7 +43,7 @@
             @vue-circle-end="progress_end"
           >241</vue-circle>
         </div>
-        <div class="space" v-on:click="show('par242AB')">
+        <div class="space">
           <vue-circle
             ref="_242"
             v-bind:progress="0"
@@ -74,7 +61,7 @@
             @vue-circle-end="progress_end"
           >242</vue-circle>
         </div>
-        <div class="space" v-on:click="show('par243')">
+        <div class="space">
           <vue-circle
             ref="_243"
             v-bind:progress="0"
@@ -95,7 +82,7 @@
       </div>
 
       <div class="flex-column separate">
-        <div class="space" v-on:click="show('f_neu251')">
+        <div class="space">
           <vue-circle
             ref="_251"
             v-bind:progress="0"
@@ -113,7 +100,7 @@
             @vue-circle-end="progress_end"
           >251</vue-circle>
         </div>
-        <div class="space" v-on:click="show('e_neu252')">
+        <div class="space">
           <vue-circle
             ref="_252"
             v-bind:progress="0"
@@ -131,7 +118,7 @@
             @vue-circle-end="progress_end"
           >252</vue-circle>
         </div>
-        <div class="space" v-on:click="show('neu253')">
+        <div class="space">
           <vue-circle
             ref="_253"
             v-bind:progress="0"
@@ -152,7 +139,7 @@
       </div>
     </div>
     <div class="d-flex justify-content-around separate-headfooter">
-      <div class="space-headerFooter" v-on:click="show('b_amphi')">
+      <div class="space-headerFooter">
         <vue-circle
           ref="_amphiB"
           v-bind:progress="0"
@@ -173,95 +160,117 @@
     </div>
   </div>
 </template>
-
 <script>
-import VueCircle from "vue2-circle-progress";
-import _ from "lodash";
 import shared from "../../shared";
-
-function attendees(refComponent) {
-  refComponent.$http.get(BACKEND_URL + "api/attendees").then(p => {
-    console.log(p.data);
-    refComponent.hits = p.data;
-
-    _.forEach(_.values(p.data), value => {
-      if (!_.isNull(value.hitInfo)) {
-        shared.computeHit(
-          value.hitInfo.percentage,
-          value.hitInfo.hitSlotId,
-          refComponent.$refs
-        );
-      }
-    });
-  });
-}
-
-function findKey(idSlotComp, refComp) {
-  return _.find(_.keys(refComp.hits), function(key) {
-    return key.includes(idSlotComp);
-  });
-}
+import VueCircle from "vue2-circle-progress";
+import vuescroll from "vuescroll";
+import _ from "lodash";
 
 export default {
   components: {
-    VueCircle
+    VueCircle,
+    vuescroll
   },
   data: function() {
     return {
-      hits: [],
       fill: { gradient: ["green"] },
-      confTitle: "",
-      confAbstract: "",
-      confKind: "",
-      room: ""
+      ops: {
+        vuescroll: {
+          mode: "slide",
+          pullRefresh: {
+            enable: true
+          },
+          pushLoad: {
+            enable: true,
+            auto: true,
+            autoLoadDistance: 10
+          }
+        }
+      }
     };
   },
   created: function() {
-    attendees(this);
+    this.$options.sockets.onmessage = msg => {
+      if (!_.startsWith(msg.data, "Keep")) {
+        var msgAsJson = JSON.parse(msg.data);
+        shared.computeHit(
+          msgAsJson.percentage,
+          msgAsJson.hitSlotId,
+          this.$refs
+        );
+      } else {
+        console.log("Keep alive");
+      }
+    };
+
+    this.$http
+      .get(BACKEND_URL + "api/tracks", { headers: shared.tokenHandle() })
+      .then(p => {
+        _.mapKeys(p.data, (value, key) => {
+          shared.computeHit(value.percentage, key, this.$refs);
+        });
+      });
   },
   methods: {
     progress_end: function() {},
     progress: function() {},
     refresh: function() {
-      console.log("refresh");
-      attendees(this);
-    },
-    show(idslot) {
-      this.$modal.show("slot-details", { idSlot: idslot });
-    },
-    hide: function() {
-      this.$modal.hide("hello-world");
-    },
-    beforeOpen(event) {
-      var key = findKey(event.params.idSlot, this);
-      var current = this.hits[key];
-      if (!_.isUndefined(current)) {
-        this.confTitle = current.slot.talk.title;
-        this.confKind = current.slot.talk.talkType;
-        this.room = current.slot.roomId;
-      } else {
-        this.confTitle = "no talk currently in this room";
-      }
-    },
-    beforeClose: function() {
-      this.confTitle = "";
-      this.confKind = "";
-      this.room = "";
+      this.$http
+        .get(BACKEND_URL + "api/tracks", {
+          headers: shared.tokenHandle()
+        })
+        .then(p => {
+          _.mapKeys(p.data, (value, key) => {
+            shared.computeHit(value.percentage, key, this.$refs);
+          });
+        });
     }
   }
 };
 </script>
 
 <style  scoped>
-.talkdetails {
-  width: 100%;
-  height: 100%;
-}
 .space {
-  margin: 20px;
+  margin: 5px;
 }
-.line {
-  border: 1px solid gray;
+
+.space-headerFooter {
+  margin: 5px;
+}
+
+.block-green {
+  display: block;
   width: 100%;
+  border: none;
+  background-color: #4caf50;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+.block-orange {
+  display: block;
+  width: 100%;
+  border: none;
+  background-color: #ffa500;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+.block-red {
+  display: block;
+  width: 100%;
+  border: none;
+  background-color: red;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  margin-bottom: 4px;
 }
 </style>
