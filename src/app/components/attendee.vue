@@ -179,8 +179,8 @@ import VueCircle from "vue2-circle-progress";
 import _ from "lodash";
 import shared from "../shared";
 
-function attendees(refComponent) {
-  refComponent.$http.get(BACKEND_URL + "api/attendees").then(p => {
+function currentTracksWitHitInfo(refComponent) {
+  refComponent.$http.get(BACKEND_URL + "api/tracks-infos").then(p => {
     console.log(p.data);
     refComponent.hits = p.data;
 
@@ -217,14 +217,13 @@ export default {
     };
   },
   created: function() {
-    attendees(this);
+    currentTracksWitHitInfo(this);
   },
   methods: {
     progress_end: function() {},
     progress: function() {},
     refresh: function() {
-      console.log("refresh");
-      attendees(this);
+      currentTracksWitHitInfo(this);
     },
     show(idslot) {
       this.$modal.show("slot-details", { idSlot: idslot });
