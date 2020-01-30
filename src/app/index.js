@@ -13,12 +13,12 @@ import async from 'async'
 import VModal from 'vue-js-modal'
 import vuescroll from 'vuescroll';
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faSync, faSignInAlt } from '@fortawesome/free-solid-svg-icons'
+import { faSync, faSignInAlt, faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 
 
-library.add(faSignInAlt, faSync)
+library.add(faSignInAlt, faSync, faArrowCircleLeft)
 Object.defineProperty(Vue.prototype, '$async', { value: async });
 
 Vue.use(VueResource);
