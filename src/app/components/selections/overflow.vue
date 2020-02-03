@@ -44,6 +44,7 @@
     </div>
     <div class="d-flex justify-content-around">
       <div class="flex-column separate">
+        <div class="d-flex justify-content-around side">Paris</div>
         <div class="space" v-on:click="show('par241')">
           <vue-circle
             ref="_241"
@@ -101,6 +102,7 @@
       </div>
 
       <div class="flex-column separate">
+        <div class="d-flex justify-content-around side">Neuilly</div>
         <div class="space" v-on:click="show('f_neu251')">
           <vue-circle
             ref="_251"
@@ -187,9 +189,7 @@ import shared from "../../shared";
 
 function currentTracksWitHitInfo(refComponent) {
   refComponent.$http.get(BACKEND_URL + "api/tracks-infos").then(p => {
-    console.log(p.data);
     refComponent.hits = p.data;
-
     _.forEach(_.values(p.data), value => {
       if (!_.isNull(value.hitInfo)) {
         shared.computeHit(

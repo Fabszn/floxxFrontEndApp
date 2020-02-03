@@ -21,3 +21,8 @@
     margin: 2px;
     padding: 9px;
 }
+
+.side {
+    font-size: 2vw;
+    color: orange;
+}

@@ -38,6 +38,7 @@
     </div>
     <div class="d-flex justify-content-around">
       <div class="flex-column separate">
+        <div class="d-flex justify-content-around side">Paris</div>
         <div class="space" v-on:click="show('par241')">
           <vue-circle
             ref="_241"
@@ -95,6 +96,7 @@
       </div>
 
       <div class="flex-column separate">
+        <div class="d-flex justify-content-around side">Neuilly</div>
         <div class="space" v-on:click="show('f_neu251')">
           <vue-circle
             ref="_251"
