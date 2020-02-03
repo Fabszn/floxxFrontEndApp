@@ -1,12 +1,16 @@
 <template>
   <div class="container-fluid">
     <div class="d-flex justify-content-around separate-headfooter">
-      <div v-on:click="backRooms">
-        <font-awesome-icon icon="arrow-circle-left" />
+      <div>
+        <button v-on:click="backRooms" type="button" class="btn btn-secondary">
+          <font-awesome-icon icon="arrow-circle-left" />
+        </button>
       </div>
 
-      <div v-on:click="refresh">
-        <font-awesome-icon icon="sync" />
+      <div>
+        <button v-on:click="refresh" type="button" class="btn btn-secondary">
+          <font-awesome-icon icon="sync" />
+        </button>
       </div>
     </div>
 
