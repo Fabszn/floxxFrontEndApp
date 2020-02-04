@@ -36,7 +36,7 @@ export const routes = [{
     component: attendee,
     children: [],
 }, {
-    path: '/stattisques',
+    path: '/statisques',
     component: statistiques,
     children: [],
 }];

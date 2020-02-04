@@ -259,7 +259,7 @@ export default {
       this.room = "";
     },
     backRooms: function() {
-      this.$router.push("/rooms");
+      this.$router.push("/menu");
     }
   }
 };

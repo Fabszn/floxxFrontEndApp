@@ -1,5 +1,16 @@
 <template>
   <div>
+    <div class="d-flex justify-content-center separate-headfooter">
+      <div>
+        <button v-on:click="backDisconnect" type="button" class="btn btn-secondary">
+          <font-awesome-icon icon="sign-out-alt" />
+        </button>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center">
+      &nbsp;
+      &nbsp;
+    </div>
     <div>
       <p>What do you want do to ?</p>
     </div>
@@ -33,7 +44,8 @@
   </div>
 </template>
 <script>
-module.exports = {
+import shared from "../shared";
+export default {
   methods: {
     navToConf: function() {
       this.$router.push("/rooms");
@@ -43,6 +55,10 @@ module.exports = {
     },
     navToStat: function() {
       this.$router.push("/statistiques");
+    },
+    backDisconnect: function() {
+      shared.cleanToken();
+      this.$router.push("/");
     }
   }
 };

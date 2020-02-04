@@ -1,5 +1,17 @@
 <template>
   <div class="d-flex flex-column">
+    <div class="d-flex justify-content-center separate-headfooter">
+      <div>
+        <button v-on:click="backRoom" type="button" class="btn btn-secondary">
+          <font-awesome-icon icon="arrow-circle-left" />
+        </button>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center">
+      &nbsp;
+      &nbsp;
+    </div>
+
     <div class="d-flex flex-column justify-content-center">
       <div class="title separate">{{title}}</div>
       <div>{{talkType}} - {{room}}</div>
@@ -158,6 +170,9 @@ export default {
             text: "Percentage has been registered"
           });
         });
+    },
+    backRoom: function() {
+      this.$router.push("/rooms");
     }
   }
 };
