@@ -26,3 +26,7 @@
     font-size: 18px;
     color: orange;
 }
+
+.btn-secondary {
+    background-color: #2E2E2E;
+}

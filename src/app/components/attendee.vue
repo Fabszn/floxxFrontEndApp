@@ -1,7 +1,9 @@
 <template>
   <div class="container-fluid">
-    <div v-on:click="refresh">
-      <font-awesome-icon icon="sync" />
+    <div>
+      <button v-on:click="refresh" type="button" class="btn btn-secondary">
+        <font-awesome-icon icon="sync" />
+      </button>
     </div>
 
     <modal

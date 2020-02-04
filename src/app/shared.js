@@ -15,7 +15,9 @@ export default {
     colorByPercentage: function chooseColor(percentage) {
         cc(percentage)
     },
-
+    cleanToken: function th() {
+        localStorage.clear("token");
+    },
     tokenHandle: function th() {
         var token = localStorage.getItem("token");
         return {
