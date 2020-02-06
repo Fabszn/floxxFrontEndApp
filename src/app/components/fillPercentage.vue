@@ -132,16 +132,18 @@ export default {
     };
   },
   created() {
-    var itemId = this.$route.params.slotid;
-    this.$http
-      .get(BACKEND_URL + "api/slots/" + itemId, {
-        headers: shared.tokenHandle()
-      })
-      .then(p => {
-        this.title = p.data.slot.talk.title;
-        this.talkType = p.data.slot.talk.talkType;
-        this.room = p.data.slot.roomId;
-      });
+    shared.securityAccess(this.$router, p => {
+      var itemId = this.$route.params.slotid;
+      this.$http
+        .get(BACKEND_URL + "api/slots/" + itemId, {
+          headers: shared.tokenHandle()
+        })
+        .then(p => {
+          this.title = p.data.slot.talk.title;
+          this.talkType = p.data.slot.talk.talkType;
+          this.room = p.data.slot.roomId;
+        });
+    });
   },
   methods: {
     progress_end: function() {},

@@ -46,6 +46,9 @@
 <script>
 import shared from "../shared";
 export default {
+  created() {
+    shared.securityAccess(this.$router, p => {});
+  },
   methods: {
     navToConf: function() {
       this.$router.push("/rooms");

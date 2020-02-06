@@ -231,7 +231,6 @@ export default {
     };
   },
   created: function() {
-    console.log("create overflow");
     shared.securityAccess(this.$router, p => {
       currentTracksWitHitInfo(this);
     });
