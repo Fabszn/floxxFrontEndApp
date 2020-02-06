@@ -1,6 +1,7 @@
 <template>
   <div class="container-fluid">
     <div id="errorlogin" class="errorMsg" :hidden="loginFailedMsg">Authentification Failed</div>
+    <div id="errorUnthorized" class="errorMsg" :hidden="notAuthrized">Authentification required</div>
     <form id="signup-form" @submit.prevent="processForm">
       <div class="form-group">
         <label for="login">Email address</label>
@@ -31,13 +32,22 @@
   </div>
 </template>
 <script>
-module.exports = {
+import _ from "lodash";
+
+export default {
   data: function() {
     return {
       email: "",
       password: "",
-      loginFailedMsg: true
+      loginFailedMsg: true,
+      notAuthrized: true
     };
+  },
+  created() {
+    var a = this.$route.query.authenticate;
+    if (a == "no") {
+      this.notAuthrized = false;
+    }
   },
   methods: {
     processForm: function() {

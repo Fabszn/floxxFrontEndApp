@@ -192,18 +192,22 @@ import _ from "lodash";
 import shared from "../../shared";
 
 function currentTracksWitHitInfo(refComponent) {
-  refComponent.$http.get(BACKEND_URL + "api/tracks-infos").then(p => {
-    refComponent.hits = p.data;
-    _.forEach(_.values(p.data), value => {
-      if (!_.isNull(value.hitInfo)) {
-        shared.computeHit(
-          value.hitInfo.percentage,
-          value.hitInfo.hitSlotId,
-          refComponent.$refs
-        );
-      }
+  refComponent.$http
+    .get(BACKEND_URL + "api/tracks-infos", {
+      headers: shared.tokenHandle()
+    })
+    .then(p => {
+      refComponent.hits = p.data;
+      _.forEach(_.values(p.data), value => {
+        if (!_.isNull(value.hitInfo)) {
+          shared.computeHit(
+            value.hitInfo.percentage,
+            value.hitInfo.hitSlotId,
+            refComponent.$refs
+          );
+        }
+      });
     });
-  });
 }
 
 function findKey(idSlotComp, refComp) {
@@ -227,20 +231,21 @@ export default {
     };
   },
   created: function() {
-    currentTracksWitHitInfo(this);
+    shared.securityAccess(this.$router, p => {
+      currentTracksWitHitInfo(this);
+    });
   },
   methods: {
     progress_end: function() {},
     progress: function() {},
     refresh: function() {
-      console.log("refresh");
       currentTracksWitHitInfo(this);
     },
     show(idslot) {
       this.$modal.show("slot-details", { idSlot: idslot });
     },
     hide: function() {
-      this.$modal.hide("hello-world");
+      this.$modal.hide("slot-details");
     },
     beforeOpen(event) {
       var key = findKey(event.params.idSlot, this);

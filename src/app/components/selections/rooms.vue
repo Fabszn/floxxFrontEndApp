@@ -50,18 +50,19 @@ export default {
     };
   },
   created() {
-    var token = localStorage.getItem("token");
-    this.$http
-      .get(BACKEND_URL + "api/slots", {
-        headers: shared.tokenHandle()
-      })
-      .then(p => {
-        this.slots = p.data.slots;
-      });
+    shared.securityAccess(this.$router, p => {
+      var token = localStorage.getItem("token");
+      this.$http
+        .get(BACKEND_URL + "api/slots", {
+          headers: shared.tokenHandle()
+        })
+        .then(p => {
+          this.slots = p.data.slots;
+        });
+    });
   },
   methods: {
     selectSlot: function() {
-      console.log("select");
       this.$router.push("fill/" + this.slotId);
     },
     validateSelection: function(item) {
