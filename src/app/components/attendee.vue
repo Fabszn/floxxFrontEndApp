@@ -184,20 +184,22 @@ import _ from "lodash";
 import shared from "../shared";
 
 function currentTracksWitHitInfo(refComponent) {
-  refComponent.$http.get(BACKEND_URL + "api/tracks-infos").then(p => {
-    console.log(p.data);
-    refComponent.hits = p.data;
+  refComponent.$http
+    .get(BACKEND_URL + "api/all-tracks-infos-for-attendees")
+    .then(p => {
+      console.log(p.data);
+      refComponent.hits = p.data;
 
-    _.forEach(_.values(p.data), value => {
-      if (!_.isNull(value.hitInfo)) {
-        shared.computeHit(
-          value.hitInfo.percentage,
-          value.hitInfo.hitSlotId,
-          refComponent.$refs
-        );
-      }
+      _.forEach(_.values(p.data), value => {
+        if (!_.isNull(value.hitInfo)) {
+          shared.computeHit(
+            value.hitInfo.percentage,
+            value.hitInfo.hitSlotId,
+            refComponent.$refs
+          );
+        }
+      });
     });
-  });
 }
 
 function findKey(idSlotComp, refComp) {

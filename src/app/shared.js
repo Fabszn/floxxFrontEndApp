@@ -15,7 +15,15 @@ export default {
     colorByPercentage: function chooseColor(percentage) {
         cc(percentage)
     },
-    cleanToken: function th() {
+    securityAccess: function sa(router, run) {
+        var token = localStorage.getItem("token");
+        if (_.isNull(token)) {
+            router.push("/?authenticate=no")
+        } else {
+            run()
+        }
+    },
+    cleanToken: function ch() {
         localStorage.clear("token");
     },
     tokenHandle: function th() {

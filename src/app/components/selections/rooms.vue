@@ -61,7 +61,6 @@ export default {
   },
   methods: {
     selectSlot: function() {
-      console.log("select");
       this.$router.push("fill/" + this.slotId);
     },
     validateSelection: function(item) {
