@@ -15,12 +15,16 @@ import vuescroll from 'vuescroll';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faSync, faSignInAlt, faArrowCircleLeft, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { VuejsDatatableFactory } from 'vuejs-datatable';
+
+
 
 
 
 library.add(faSignInAlt, faSync, faArrowCircleLeft, faSignOutAlt)
 Object.defineProperty(Vue.prototype, '$async', { value: async });
 
+Vue.use(VuejsDatatableFactory);
 Vue.use(VueResource);
 Vue.use(Router);
 Vue.use(Dropdown);

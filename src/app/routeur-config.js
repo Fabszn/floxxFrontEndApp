@@ -6,37 +6,42 @@ import fill from './components/fillPercentage.vue'
 import metrics from './components/metrics.vue'
 import attendee from './components/attendee.vue'
 import statistiques from './components/statistiques.vue'
+import admin from './components/admin.vue'
 
 export const routes = [{
     path: '/',
     component: login,
-    children: [],
+    children: []
 }, {
     path: '/menu',
     component: menu,
-    children: [],
+    children: []
 }, {
     path: '/rooms',
     component: rooms,
-    children: [],
+    children: []
 }, {
     path: '/overflow',
     component: overflow,
-    children: [],
+    children: []
 }, {
     path: '/fill/:slotid',
     component: fill,
-    children: [],
+    children: []
 }, {
     path: '/metrics',
     component: metrics,
-    children: [],
+    children: []
 }, {
     path: '/attendee',
     component: attendee,
-    children: [],
+    children: []
 }, {
     path: '/statisques',
     component: statistiques,
-    children: [],
+    children: []
+}, {
+    path: '/admin',
+    component: admin,
+    children: []
 }];
