@@ -5,8 +5,10 @@ import rooms from './components/selections/rooms.vue'
 import fill from './components/fillPercentage.vue'
 import metrics from './components/metrics.vue'
 import attendee from './components/attendee.vue'
-import statistiques from './components/statistiques.vue'
 import admin from './components/admin.vue'
+import topsList from './components/admins/topsList.vue'
+import redcoatmng from './components/admins/redcoatmng.vue'
+import statistiques from './components/admins/statistiques.vue'
 
 export const routes = [{
     path: '/',
@@ -37,11 +39,19 @@ export const routes = [{
     component: attendee,
     children: []
 }, {
-    path: '/statisques',
-    component: statistiques,
-    children: []
-}, {
     path: '/admin',
     component: admin,
+    children: []
+}, {
+    path: '/tops-list',
+    component: topsList,
+    children: []
+}, {
+    path: '/redcoatmng',
+    component: redcoatmng,
+    children: []
+}, {
+    path: '/statistiques',
+    component: statistiques,
     children: []
 }];

@@ -1,66 +1,80 @@
 <template>
-  <div id="vue-root" class="table">
-    <datatable :columns="columns" :data="rows"></datatable>
+  <div>
+    <div class="d-flex justify-content-center separate-headfooter">
+      <div>
+        <button v-on:click="backMenu" type="button" class="btn btn-secondary">
+          <font-awesome-icon icon="arrow-circle-left" />
+        </button>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center">
+      &nbsp;
+      &nbsp;
+    </div>
+    <div>
+      <p>What do you want do to ?</p>
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <button
+            type="button"
+            v-on:click="navToList"
+            class="btn btn-primary btn-lg block"
+          >Tops Lists</button>
+        </div>
+      </div>
+      <div class="row">&nbsp;</div>
+      <div class="row">
+        <div class="col-12">
+          <button
+            type="button"
+            v-on:click="navToStats"
+            class="btn btn-primary btn-lg block"
+          >Statistiques</button>
+        </div>
+      </div>
+      <div class="row">&nbsp;</div>
+      <div class="row">
+        <div class="col-12">
+          <button type="button" v-on:click="navToRCMng" class="btn btn-primary block">RedCoats</button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   data: function() {
-    return {
-      columns: [
-        { label: "id", field: "id" },
-        {
-          label: "Username",
-          field: "user.username",
-          headerClass: "class-in-header second-class"
-        },
-        { label: "First Name", field: "user.firstName" },
-        { label: "Last Name", field: "user.lastName" },
-        { label: "Email", field: "user.email" },
-        {
-          label: "Address",
-          representedAs: ({ address, city, state }) =>
-            `${address}<br />${city}, ${state}`,
-          interpolate: true
-        }
-      ],
-      rows: [
-        {
-          id: 1,
-          user: {
-            username: "dprice0",
-            firstName: "Daniel",
-            lastName: "Price",
-            email: "dprice0@blogs.com"
-          },
-          address: "3 Toban Park",
-          city: "Pocatello",
-          state: "Idaho"
-        },
-        {
-          id: 2,
-          user: {
-            username: "dprice0",
-            firstName: "Daniel",
-            lastName: "Price",
-            email: "dprice0@blogs.com"
-          },
-          address: "3 Toban Park",
-          city: "Pocatello",
-          state: "Idaho"
-        }
-        //...
-      ]
-    };
+    return {};
+  },
+  methods: {
+    backMenu: function() {
+      this.$router.push("/menu");
+    },
+    navToList: function() {
+      this.$router.push("/tops-list");
+    },
+    navToRCMng: function() {
+      this.$router.push("/redcoatmng");
+    },
+    navToStats: function() {
+      this.$router.push("/statistiques");
+    }
   }
 };
 </script>
 
-.table{
-    width:100%;
+<style  scoped>
+.block {
+  display: block;
+  width: 100%;
+  border: none;
+  background-color: #3399ff;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
 }
-
-
-<style>
 </style>

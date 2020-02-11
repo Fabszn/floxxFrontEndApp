@@ -30,14 +30,12 @@
           >Overflow</button>
         </div>
       </div>
+      <!-- add admin rules for displaying-->
+
       <div class="row">&nbsp;</div>
       <div class="row">
         <div class="col-12">
-          <button
-            type="button"
-            class="btn btn-secondary btn-lg block"
-            v-on:click="navToStat"
-          >statistiques</button>
+          <button type="button" class="btn btn-secondary btn-lg block" v-on:click="navToStat">admin.</button>
         </div>
       </div>
     </div>
@@ -57,7 +55,7 @@ export default {
       this.$router.push("/overflow");
     },
     navToStat: function() {
-      this.$router.push("/statistiques");
+      this.$router.push("/admin");
     },
     backDisconnect: function() {
       shared.cleanToken();
