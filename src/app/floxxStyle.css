@@ -4,6 +4,12 @@
     border-radius: 10px;
 }
 
+.separate_b {
+    border: 1px dashed black;
+    margin: 2px;
+    border-radius: 10px;
+}
+
 .separate-headfooter {
     margin: 2px;
 }

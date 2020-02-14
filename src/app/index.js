@@ -11,17 +11,17 @@ import Notifications from 'vue-notification'
 import './floxxStyle.css'
 import async from 'async'
 import VModal from 'vue-js-modal'
-import vuescroll from 'vuescroll';
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faSync, faSignInAlt, faArrowCircleLeft, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
+import { faSync, faSignInAlt, faArrowCircleLeft, faSignOutAlt, faCopy } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { VuejsDatatableFactory } from 'vuejs-datatable';
+import VueClipboard from 'vue-clipboard2'
 
 
 
 
 
-library.add(faSignInAlt, faSync, faArrowCircleLeft, faSignOutAlt)
+library.add(faSignInAlt, faSync, faArrowCircleLeft, faSignOutAlt, faCopy)
 Object.defineProperty(Vue.prototype, '$async', { value: async });
 
 Vue.use(VuejsDatatableFactory);
@@ -32,7 +32,7 @@ Vue.use(VueLodash);
 Vue.use(VueNativeSock, WS_BACKEND_HOST + '/api/stream/hit', { format: 'json' })
 Vue.use(Notifications)
 Vue.use(VModal)
-Vue.use(vuescroll)
+Vue.use(VueClipboard)
 
 
 Vue.component('dropdown', Dropdown)
