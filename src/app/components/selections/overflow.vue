@@ -13,17 +13,35 @@
         </button>
       </div>
     </div>
-
+    <notifications group="floxx" />
     <modal
       name="slot-details"
       @before-open="beforeOpen"
       @before-close="beforeClose"
       :adaptive="true"
     >
-      <div class="talkdetails bg-light text-muted">
-        <p>Titre : {{confTitle}}</p>
+      <div class="talkdetails">
+        <p>
+          Titre :
+          {{confTitle}}
+        </p>
         <p>Type conférence : {{confKind}}</p>
         <p>Salle : {{room}}</p>
+
+        <button
+          type="button"
+          v-clipboard:copy="twitterMessage"
+          v-clipboard:success="onCopy"
+          v-clipboard:error="onError"
+          class="btn btn-secondary"
+        >
+          Copy to clipboard
+          <font-awesome-icon icon="copy" />
+        </button>
+
+        <div class="separate_b space">
+          <p>{{twitterMessage}}</p>
+        </div>
       </div>
     </modal>
     <div class="d-flex justify-content-around separate-headfooter">
@@ -227,7 +245,8 @@ export default {
       confTitle: "",
       confAbstract: "",
       confKind: "",
-      room: ""
+      room: "",
+      twitterMessage: ""
     };
   },
   created: function() {
@@ -236,6 +255,17 @@ export default {
     });
   },
   methods: {
+    onCopy: function(e) {
+      this.$notify({
+        group: "floxx",
+        type: "success",
+        title: "Success",
+        text: "Text has been copied into clipboard!"
+      });
+    },
+    onError: function(e) {
+      //alert("Failed to copy texts");
+    },
     progress_end: function() {},
     progress: function() {},
     refresh: function() {
@@ -254,14 +284,28 @@ export default {
         this.confTitle = current.slot.talk.title;
         this.confKind = current.slot.talk.talkType;
         this.room = current.slot.roomId;
+        this.fromTime = current.slot.fromTime;
+        this.toTime = current.slot.toTime;
+        this.twitterMessage =
+          "La salle " +
+          this.room +
+          " [" +
+          this.fromTime +
+          " - " +
+          this.toTime +
+          "] " +
+          this.confTitle +
+          " est en OVERFLOW ....  @DevoxxFR";
       } else {
-        this.confTitle = "no talk currently in this room";
+        this.confTitle = "No talk currently in this room";
       }
     },
     beforeClose: function() {
       this.confTitle = "";
       this.confKind = "";
       this.room = "";
+      this.fromTime = "";
+      this.toTime = "";
     },
     backRooms: function() {
       this.$router.push("/menu");
@@ -274,8 +318,13 @@ export default {
 .talkdetails {
   width: 100%;
   height: 100%;
+  background-color: #343a40;
+  color: #fff!;
 }
 .space {
+  margin: 20px;
+}
+.spacePopin {
   margin: 20px;
 }
 .line {
