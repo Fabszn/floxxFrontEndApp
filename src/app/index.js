@@ -15,8 +15,8 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faSync, faSignInAlt, faArrowCircleLeft, faSignOutAlt, faCopy } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { VuejsDatatableFactory } from 'vuejs-datatable';
-import VueClipboard from 'vue-clipboard2'
-import FileUpload from 'v-file-upload'
+
+
 
 
 
@@ -31,8 +31,7 @@ Vue.use(VueLodash);
 Vue.use(VueNativeSock, WS_BACKEND_HOST + '/api/stream/hit', { format: 'json' })
 Vue.use(Notifications)
 Vue.use(VModal)
-Vue.use(VueClipboard)
-Vue.use(FileUpload)
+
 
 Vue.component('dropdown', Dropdown)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
