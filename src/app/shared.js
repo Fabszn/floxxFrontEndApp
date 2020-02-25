@@ -16,7 +16,7 @@ export default {
         cc(percentage)
     },
     securityAccess: function sa(router, run) {
-        var token = localStorage.getItem("token");
+        var token = sessionStorage.getItem("token");
         if (_.isNull(token)) {
             router.push("/?authenticate=no")
         } else {
@@ -24,10 +24,12 @@ export default {
         }
     },
     cleanToken: function ch() {
-        localStorage.clear("token");
+        sessionStorage.clear("token");
+        sessionStorage.clear("isAdmin");
+        sessionStorage.clear("name");
     },
     tokenHandle: function th() {
-        var token = localStorage.getItem("token");
+        var token = sessionStorage.getItem("token");
         return {
             Authorization: "Bearer " + token,
             Accept: "application/json"

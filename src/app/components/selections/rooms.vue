@@ -13,17 +13,6 @@
     </div>
 
     <div class="d-flex align-items-center justify-content-center flex-column">
-      <div>
-        <dropdown
-          v-bind:options="slots"
-          v-on:selected="validateSelection"
-          v-on:filter="getDropdownValues"
-          :disabled="false"
-          name="Room"
-          :maxItem="10"
-          placeholder="Please select a room/slot"
-        ></dropdown>
-      </div>
       <div class="space">&nbsp;</div>
 
       <div v-if="slotId != ''" class="text-justify title separate">{{title}}</div>
@@ -51,13 +40,14 @@ export default {
   },
   created() {
     shared.securityAccess(this.$router, p => {
-      var token = localStorage.getItem("token");
       this.$http
         .get(BACKEND_URL + "api/slots", {
           headers: shared.tokenHandle()
         })
         .then(p => {
-          this.slots = p.data.slots;
+          this.title = p.data.talk.title;
+          this.talkType = p.data.talk.talkType;
+          this.slotId = p.data.slotId;
         });
     });
   },
@@ -66,7 +56,7 @@ export default {
       this.$router.push("fill/" + this.slotId);
     },
     validateSelection: function(item) {
-      var token = localStorage.getItem("token");
+      var token = sessionStorage.getItem("token");
       this.$http
         .get(BACKEND_URL + "api/slots/" + item.id, {
           headers: shared.tokenHandle()
@@ -80,7 +70,7 @@ export default {
     getDropdownValues: function(p) {},
     refresh: function() {
       console.log("refresh");
-      var token = localStorage.getItem("token");
+      var token = sessionStorage.getItem("token");
       this.$http
         .get(BACKEND_URL + "api/slots", {
           headers: shared.tokenHandle()

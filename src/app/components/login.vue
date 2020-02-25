@@ -61,7 +61,9 @@ export default {
         )
         .then(
           r => {
-            localStorage.setItem("token", r.body.token);
+            sessionStorage.setItem("token", r.body.token);
+            sessionStorage.setItem("name", r.body.name);
+            sessionStorage.setItem("isAdmin", r.body.isAdmin);
             this.$router.push("/menu");
           },
           r => {

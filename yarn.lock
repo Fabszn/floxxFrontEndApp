@@ -5186,11 +5186,6 @@ vuejs-datatable@^2.0.0-alpha.7:
     object-path "^0.11.4"
     vue-property-decorator "^8.2.2"
 
-vuescroll@^4.14.4:
-  version "4.14.4"
-  resolved "https://registry.yarnpkg.com/vuescroll/-/vuescroll-4.14.4.tgz#5bb181bd851bdd7a4b215083039968853a086cf1"
-  integrity sha512-v+QYnoZLr1Eo93CekHOyF54e5c1Mu9s+k3G6Qaw/vRL20j1hnS/mMejW2pn60nuFinqKdXb9MghjJP4jKrc8+w==
-
 watchpack@^1.5.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/watchpack/-/watchpack-1.6.0.tgz#4bc12c2ebe8aa277a71f1d3f14d685c7b446cd00"
