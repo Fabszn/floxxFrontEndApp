@@ -1,6 +1,7 @@
 .separate {
     border: 1px dashed white;
     margin: 2px;
+    padding: 10;
     border-radius: 10px;
 }
 

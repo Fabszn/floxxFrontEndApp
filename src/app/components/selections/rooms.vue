@@ -13,25 +13,21 @@
     </div>
 
     <div class="d-flex align-items-center justify-content-center flex-column">
-      <div>
-        <dropdown
-          v-bind:options="slots"
-          v-on:selected="validateSelection"
-          v-on:filter="getDropdownValues"
-          :disabled="false"
-          name="Room"
-          :maxItem="10"
-          placeholder="Please select a room/slot"
-        ></dropdown>
+      <div class="space">&nbsp;</div>
+      <div v-if="isTalk">
+        <div v-if="slotId != ''" class="text-justify title separate">{{title}}</div>
+
+        <div v-if="slotId != ''">{{talkType}}</div>
+
+        <div class="space">&nbsp;</div>
+        <div v-if="slotId != ''">{{room}}</div>
+        <div class="space">&nbsp;</div>
+        <div v-if="slotId != ''">
+          <button v-on:click="selectSlot" class="btn btn-primary">Select</button>
+        </div>
       </div>
-      <div class="space">&nbsp;</div>
-
-      <div v-if="slotId != ''" class="text-justify title separate">{{title}}</div>
-
-      <div v-if="slotId != ''">{{talkType}}</div>
-      <div class="space">&nbsp;</div>
-      <div v-if="slotId != ''">
-        <button v-on:click="selectSlot" class="btn btn-primary">Select</button>
+      <div v-if="!isTalk">
+        <div class="text-justify title separate">{{title}}</div>
       </div>
     </div>
   </div>
@@ -43,22 +39,34 @@ import shared from "../../shared";
 export default {
   data: function() {
     return {
-      slots: [],
       title: "",
       talkType: "",
-      slotId: ""
+      room: "",
+      slotId: "",
+      isTalk: false
     };
   },
   created() {
     shared.securityAccess(this.$router, p => {
-      var token = localStorage.getItem("token");
       this.$http
         .get(BACKEND_URL + "api/slots", {
           headers: shared.tokenHandle()
         })
-        .then(p => {
-          this.slots = p.data.slots;
-        });
+        .then(
+          p => {
+            this.title = p.data.talk.title;
+            this.talkType = p.data.talk.talkType;
+            this.slotId = p.data.slotId;
+            this.room = p.data.roomId;
+            this.isTalk = true;
+          },
+          error => {
+            if (error.status == 404) {
+              this.isTalk = false;
+              this.title = error.body;
+            }
+          }
+        );
     });
   },
   methods: {
@@ -66,7 +74,7 @@ export default {
       this.$router.push("fill/" + this.slotId);
     },
     validateSelection: function(item) {
-      var token = localStorage.getItem("token");
+      var token = sessionStorage.getItem("token");
       this.$http
         .get(BACKEND_URL + "api/slots/" + item.id, {
           headers: shared.tokenHandle()
@@ -80,7 +88,7 @@ export default {
     getDropdownValues: function(p) {},
     refresh: function() {
       console.log("refresh");
-      var token = localStorage.getItem("token");
+      var token = sessionStorage.getItem("token");
       this.$http
         .get(BACKEND_URL + "api/slots", {
           headers: shared.tokenHandle()
