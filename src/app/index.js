@@ -15,6 +15,10 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faSync, faSignInAlt, faArrowCircleLeft, faSignOutAlt, faCopy } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { VuejsDatatableFactory } from 'vuejs-datatable';
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
 
 
 
@@ -31,6 +35,7 @@ Vue.use(VueLodash);
 Vue.use(VueNativeSock, WS_BACKEND_HOST + '/api/stream/hit', { format: 'json' })
 Vue.use(Notifications)
 Vue.use(VModal)
+Vue.use(BootstrapVue)
 
 
 Vue.component('dropdown', Dropdown)
