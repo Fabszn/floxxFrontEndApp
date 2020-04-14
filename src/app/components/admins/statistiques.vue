@@ -16,10 +16,17 @@
       &nbsp;
       &nbsp;
     </div>
+    <b-input-group size="sm">
+      <b-form-input v-model="filter" type="search" id="filterInput" placeholder="Type to Search"></b-form-input>
+      <b-input-group-append>
+        <b-button :disabled="!filter" @click="filter = ''">Clear</b-button>
+      </b-input-group-append>
+    </b-input-group>
+
     <b-table
       head-variant="light"
-      dark="true"
       details-td-class="cell"
+      dark="true"
       responsive="true"
       striped
       hover
@@ -27,9 +34,11 @@
       :sort-desc.sync="sortDesc"
       :fields="fields"
       :items="items"
+      :filter="filter"
     >
       <template v-slot:cell(slotId)="data">{{ data.value.id }}</template>
       <template v-slot:cell(talk)="data">{{ data.value.title }} ({{ data.value.talkType }})</template>
+      <template v-slot:cell(percentage)="data">{{ data.value }}</template>
 
       <template v-slot:head(slotId)>Id</template>
       <template v-slot:head(percentage)>%</template>
@@ -58,7 +67,9 @@ export default {
         { key: "fromtime", sortable: true },
         { key: "totime", sortable: false },
         { key: "day", sortable: false }
-      ]
+      ],
+      filter: null,
+      filterOn: ["slotId"]
     };
   },
   created: function() {
