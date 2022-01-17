@@ -25,3 +25,10 @@ Floxx is deployed has 3 environments :
 # Releases
 
     - v0.0.1
+
+# Actions 
+
+Install application : 
+
+  1) do an export : export NODE_ENV=development
+  2) npm install
